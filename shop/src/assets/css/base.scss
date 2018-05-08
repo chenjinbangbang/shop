@@ -1,0 +1,46 @@
+body,html{ height:100%;}
+body{ background-color:#fff; color: #666;}
+*{ box-sizing:border-box;}
+body,p,ul,ol,li,h1,h2,h3,h4,h5,h6,dt,dd{ margin:0;}
+ul,ol,li{ padding:0;}
+ul,ol{ list-style-type:none;}
+$color: #ee7a23;
+.themeColor{ color:$color;}
+.colorSub{ color:#f00;}
+.colorBgSub{ background-color:#f00;}
+
+//公共字体样式
+.black{ color:#666;}
+.primary{ color:#409EFF;}
+.success{ color:#67C23A;}
+.warning{ color:#EB9E05;}
+.danger{ color:#FA5555;}
+.info{ color:#878D99;}
+
+.clearfix{ clear:both;}
+a:link,a:visited{ text-decoration:none;}
+
+[v-cloak]{ display:none;}
+//.red{ color:#ad2c2d;}
+.red{ color:#f00;}
+.spinner{ margin-top:3rem;}
+
+//最简单过渡，设置进入状态和进入过渡
+.scale-enter{ transform:scale(0.5,0.5);}
+.scale-enter-active{ transition: all 0.5s;}
+
+.scale1-enter{ transform:scale(0.1,0.1);}
+.scale1-enter-active{ transition: all 0.2s;}
+
+.fade-enter{ opacity:0;}
+.fade-enter-active{ transition: all 1s;}
+
+//增加积分动画
+.add-enter,.add-leave-to{ opacity:0; transform:translate(0,-15px);}
+.add-enter-active,.add-leave-active{ transition: all 0.5s;}
+
+.content{
+    .top{
+        h2{ height:40px; line-height:40px; margin-bottom:20px; border-bottom:1px solid #eee;}
+    }
+}
