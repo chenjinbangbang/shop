@@ -17,6 +17,8 @@ import { PersonalPage } from "../pages/personal/personal";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { ConfigProvider } from "../providers/config/config";
+import { HttpServicesProvider } from '../providers/http-services/http-services';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { ConfigProvider } from "../providers/config/config";
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    ConfigProvider
+    ConfigProvider,
+    HttpServicesProvider,
+    StorageProvider
   ]
 })
 export class AppModule {}

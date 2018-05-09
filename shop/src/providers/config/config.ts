@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -11,9 +11,9 @@ import { Injectable } from '@angular/core';
 export class ConfigProvider {
 
   //api请求地址
-  public apiUrl = 'http://xxxxx';
+  public apiUrl = 'http://www.mjpai.cn:3100';
 
-  constructor(public http: HttpClient) {
+  constructor() {
     console.log('Hello ConfigProvider Provider');
   }
 
