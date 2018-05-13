@@ -1,4 +1,4 @@
-import { HttpClient, Jsonp, Headers } from '@angular/common/http';
+import { Http, Jsonp, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 //引入config
@@ -18,8 +18,8 @@ export class HttpServicesProvider {
   //设置post的格式
   private headers = new Headers({ "Content-Type": "application/json" });
 
-  constructor(public http: HttpClient, public jsonp: Jsonp, public config: ConfigProvider) {
-    console.log('Hello HttpServicesProvider Provider');
+  constructor(public http: Http, public jsonp: Jsonp, public config: ConfigProvider) {
+    //console.log('Hello HttpServicesProvider Provider');
   }
 
   requestData(apiUrl, callback) {

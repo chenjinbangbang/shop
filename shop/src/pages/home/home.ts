@@ -24,11 +24,11 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public config: ConfigProvider,public httpService: HttpServicesProvider) {
     //获取列表
-    //this.getList();
+    this.getList();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+    //console.log('ionViewDidLoad HomePage');
   }
 
   //点击搜索
@@ -38,9 +38,9 @@ export class HomePage {
 
   //获取列表
   getList(){
-    // this.httpService.requestData('/api/users/code',res => {
-    //   console.log(res);
-    // });
+    this.httpService.requestData('/api/users/code',res => {
+      console.log(res);
+    });
   }
 
 }

@@ -3,6 +3,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { IonicApp, IonicModule, IonicErrorHandler } from "ionic-angular";
 import { MyApp } from "./app.component";
 
+//注册http和jsonp
+import { HttpModule, JsonpModule } from "@angular/http";
+
 import { AboutPage } from "../pages/about/about";
 import { ContactPage } from "../pages/contact/contact";
 import { TabsPage } from "../pages/tabs/tabs";
@@ -17,8 +20,8 @@ import { PersonalPage } from "../pages/personal/personal";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { ConfigProvider } from "../providers/config/config";
-import { HttpServicesProvider } from '../providers/http-services/http-services';
-import { StorageProvider } from '../providers/storage/storage';
+import { HttpServicesProvider } from "../providers/http-services/http-services";
+import { StorageProvider } from "../providers/storage/storage";
 
 @NgModule({
   declarations: [
@@ -33,7 +36,7 @@ import { StorageProvider } from '../providers/storage/storage';
     StorePage,
     PersonalPage
   ],
-  imports: [BrowserModule, IonicModule.forRoot(MyApp)],
+  imports: [BrowserModule, HttpModule, JsonpModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,

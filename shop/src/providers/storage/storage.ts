@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -10,8 +10,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StorageProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello StorageProvider Provider');
+  constructor(public http: Http) {
+    //console.log('Hello StorageProvider Provider');
   }
 
   set(key,value){

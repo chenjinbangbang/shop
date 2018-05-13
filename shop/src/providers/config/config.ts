@@ -14,7 +14,7 @@ export class ConfigProvider {
   public apiUrl = 'http://www.mjpai.cn:3100';
 
   constructor() {
-    console.log('Hello ConfigProvider Provider');
+    //console.log('Hello ConfigProvider Provider');
   }
 
 }
