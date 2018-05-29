@@ -1,4 +1,27 @@
 
+var vm = new Vue({
+	el: '#login',
+	data: {},
+	mounted: function(){
+		mui.plusReady(function(){
+			
+			plus.navigator.setStatusBarStyle( "light" );  
+			
+		});
+	},
+	methods: {
+		loginBtn: function(){
+			mui.openWindow({
+				url: 'loginPage.html',
+				id: 'loginPage.html',
+				waiting: {
+					autoShow: false,
+				}
+			});
+		}
+	}
+});
+
  mui.plusReady(function(){
  	
  	
@@ -33,7 +56,7 @@
  	};
  	
  	//检查登录状态，锁屏状态开始
- 	if(settings.autoLogin && state.token && settings.gestures){
+ 	/*if(settings.autoLogin && state.token && settings.gestures){
  		mui.openWindow({
  			url: 'unlock.html',
  			id: 'unlock',
@@ -94,7 +117,7 @@
  			oauthArea.style.display = 'none';
  			plus.nativeUI.toast('获取登录认证失败：' + e.message);
  		});
- 	}
+ 	}*/
  	
  	
  	

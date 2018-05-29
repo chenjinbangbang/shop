@@ -1,10 +1,15 @@
 
 var vm = new Vue({
 	el: '#refreshContainer',
-	data: {},
+	data: {
+		sliders: [],
+		icons: [],
+		types: []
+	},
 	mounted: function(){
+		var self = this;
 		mui.plusReady(function(){
-			
+
 			//设置状态栏样式
 			plus.navigator.setStatusBarStyle( "dark" );  
 			var height = plus.navigator.getStatusbarHeight();
@@ -24,28 +29,22 @@ var vm = new Vue({
 				mui.alert('网络异常，请检查网络设置！');  
 			}
 			
+			
 			mui.init({
-				statusBarBackground:"#FF0000",
+				//statusBarBackground:"#FF0000",
 				//配置下拉刷新和上拉加载
 				pullRefresh: {
 					container: '#refreshContainer',
 					//下拉刷新
-					down: {
+					down: { 
 						auto: true,
-						callback: function pulldownRefresh(){
+						callback: function(){
 							//获取首页数据
-							initData();
+							self.initData();
 							//加载首页栏目板块
-							initColumn();
+							//self.initColumn();
 						}
 					},
-					//上拉加载
-					/*up: {
-						callback: function pullupRefresh(){
-							//获取首页数据
-							initData();
-						}
-					}*/
 				}
 			});
 			
@@ -54,178 +53,38 @@ var vm = new Vue({
 		});
 	},
 	methods: {
-		
+		initData: function(){
+
+			var self = this;
+			app.ajax('/plugin.php?mod=wechat&act=app&do=config',{},function(data){
+				
+				//轮播图  
+				self.sliders = data.slides;
+				//console.log(JSON.stringify(self.sliders));
+				
+				//dom还没有更新
+				self.$nextTick(function(){ //dom现在更新了
+					//必须在这里，不然轮播图无效
+					var gallery = mui('.mui-slider'); 
+					gallery.slider({ 
+						interval: 2000 //自动轮播周期
+					});	
+				});
+				
+				//分类栏目
+				self.icons = data.icon;
+				
+				//专区栏目
+				self.types = data.type;
+				
+				
+				//结束下拉刷新
+				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+				
+			});
+		}
 	}
 });
-
-//获取首页数据
-function initData(){   
-	app.ajax('/plugin.php?mod=wechat&act=app&do=config',{},function(data){
-		//console.log(JSON.stringify(data));
-		
-		//轮播图  
-		var sliders = data.slides;
-		var banner = document.querySelector('.banner');
-		banner.innerHTML = ''; //初始化
-		var bannerImg = document.createElement('div');
-		bannerImg.className = 'mui-slider-group mui-slider-loop';
-		var bannerIndex = document.createElement('div');
-		bannerIndex.className = 'mui-slider-indicator';
-		
-		var str = '',strIndex = '';
-		str += '<div class="mui-slider-item mui-slider-item-duplicate">'+
-			'<a href="'+sliders[sliders.length-1].url+'">'+
-				'<img src="'+sliders[sliders.length-1].img+'"/>'+
-			'</a>'+ 
-		'</div>';
-		mui.each(sliders,function(index,item){
-			str += '<div class="mui-slider-item">'+
-				'<a href="'+item.url+'">'+
-					'<img src="'+item.img+'"/>'+
-				'</a>'+
-			'</div>';
-			
-			if(index == 0){
-				strIndex += '<div class="mui-indicator mui-active"></div>';
-			}else{
-				strIndex += '<div class="mui-indicator"></div>';
-			}
-			
-		});
-		str += '<div class="mui-slider-item mui-slider-item-duplicate">'+
-			'<a href="'+sliders[0].url+'">'+
-				'<img src="'+sliders[0].img+'"/>'+
-			'</a>'+
-		'</div>';
-		bannerImg.innerHTML = str;
-		bannerIndex.innerHTML = strIndex;
-		banner.appendChild(bannerImg);
-		banner.appendChild(bannerIndex);
-
-		//必须在这里，不然轮播图无效
-		var gallery = mui('.mui-slider'); 
-		gallery.slider({ 
-			interval: 2000 //自动轮播周期
-		});
-		
-		//分类
-		var icon = data.icon;
-		var classify = document.querySelector('.classify');
-		classify.innerHTML = ''; //初始化
-		var classifyUl = document.createElement('ul');
-		
-		var classifyStr = '';
-		mui.each(icon,function(index,item){
-			classifyStr += '<li>'+
-				'<a href="../goodsList.html" title="'+item.type+'">'+
-				'<div class="icon">'+
-					'<img src="'+item.img+'" alt="" />'+
-				'</div>'+
-				'<p>'+item.name+'</p>'+
-				'</a>'+
-			'</li>';
-		});
-		classifyUl.innerHTML = classifyStr;
-		classify.appendChild(classifyUl);
-		
-		
-		//专区栏目
-		var type = data.type;
-		var column = document.getElementById("column"); //栏目父级
-		column.innerHTML = ''; //初始化
-		//var columnStr = '';
-		
-		mui.each(type,function(index,item){
-			
-			var activity = document.createElement('div');
-			activity.className = 'activity';
-			
-			//标题
-			var t = document.createElement('div');
-			t.className = 't';
-			console.log(JSON.stringify(item));
-			t.style.background = '-webkit-linear-gradient(left, '+ item.color[0] +' , '+ item.color[1] +')';
-			t.innerHTML = '<div><h4>'+ item.name +'</h4></div>';
-			activity.appendChild(t);
-			
-			//中间内容
-			var data = item.data;
-			var activityUl = document.createElement('ul');
-			activityUl.className = 'tt';
-			var dataStr = '';
-			mui.each(data,function(index,item){ 
-				dataStr += '<li>'+
-							'<a href="../../pages/detail.html">'+
-								/*'<div class="activity-left">'+
-									'<p class="title titleColor0">'+ item.name +'</p>'+
-									'<p class="name">'+ item.name +'</p>'+
-									'<div class="img">'+
-										'<img src="'+ item.img +'" alt="" />'+
-									'</div>'+
-								'</div>'+*/
-								'<div class="activity-right">'+
-									'<img src="'+ item.img +'" alt="" />'+
-								'</div>'+
-							'</a>'+
-						'</li>';
-			});
-			activityUl.innerHTML = dataStr;
-			activity.appendChild(activityUl);
-			
-			//底部内容
-			var goodslist = item.goodslist;
-			var view = document.createElement('div');
-			view.className = 'view';
-			
-			//今日精选
-			var viewTitle = '<div class="view-title">'+
-							 '<div>今日精选</div>'+
-						'</div>';
-			view.innerHTML = viewTitle;
-			
-			//商品信息
-			var goodsWrapper = document.createElement('div');
-			goodsWrapper.className = 'made scrollbox';
-			goodsWrapper.id = 'horizontal';
-			var goodsWrapperScroll = document.createElement('div');
-			goodsWrapperScroll.className = 'madegame';
-			var goodsWrapperScrollUl = document.createElement('ul');
-			//goodsWrapperScrollUl.id = 'ho';
-			
-			var goodsStr = '';
-			mui.each(goodslist,function(index,item){
-				goodsStr += '<li>'+
-								'<a href="../../pages/detail.html">'+
-						            '<span class="img">'+
-					            		'<img src="'+ item.pic +'" alt="" />'+
-						            '</span>'+
-						            '<span class="title">'+ item.title +'</span>'+
-						            '<div class="title1">#'+ item.title +'</div>'+
-						        '</a>'+
-						       '</li>';
-			});
-			goodsWrapperScrollUl.innerHTML = goodsStr;
-			goodsWrapperScroll.appendChild(goodsWrapperScrollUl);
-			
-			goodsWrapper.appendChild(goodsWrapperScroll);
-			view.appendChild(goodsWrapper);
-			activity.appendChild(view);
-			
-			column.appendChild(activity);
-			
-		});
-		
-
-
-		//滚动到底部  
-		//mui('.mui-content.mui-scroll-wrapper').scroll().scrollToBottom(500);
-		
-		//下拉刷新结束
-		mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
-
-		
-	});
-}
 
 //加载首页栏目板块
 function initColumn(title){ 

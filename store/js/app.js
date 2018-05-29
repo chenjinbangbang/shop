@@ -423,7 +423,7 @@ App.prototype.endLoadMore = function(more){
  * @param {Object} options           设置，wait 是否显示等待窗口，login 是否需要登录数据，close 是否关闭等待窗口
  */
 
-App.prototype.ajax = function(path,data,successCallback,errorCallback,options){
+App.prototype.ajax = function(path,data,successCallback){
 	
 	var that = this;
 	if(typeof data === 'function'){
@@ -432,33 +432,33 @@ App.prototype.ajax = function(path,data,successCallback,errorCallback,options){
 		successCallback = data;
 		data = null;
 	}
-	if(typeof errorCallback === "object"){
+	/*if(typeof errorCallback === "object"){
 		options = errorCallback;
-	}
-	var mOptions = mui.extend({
+	}*/
+	/*var mOptions = mui.extend({
 		close: true,
 		wait: true,
 		login: false,
-	},options);
+	},options);*/
 	
-	var mData = {};
-	mui.extend(mData,data);
+	//var mData = {};
+	//mui.extend(mData,data);
 	
 	//等待框
-	if(mOptions.wait){
+	/*if(mOptions.wait){
 		if(typeof mOptions.wait === 'string'){
 			app.waiting(mOptions.wait);
 		}else{
 			//plus.nativeUI.showWaiting('加载中...');
 		}
-	}
+	}*/
 	//登录
-	if(mOptions.login){
+	/*if(mOptions.login){
 		mData.userid = this.getUserId();
-	}
+	}*/
 	//调用数据
 	mui.ajax(AppConfig.apiPath + path,{ 
-		data: mData, 
+		data: data, 
 		dataType: 'json',
 		type: 'get',
 		timeout: 10000,
@@ -469,10 +469,9 @@ App.prototype.ajax = function(path,data,successCallback,errorCallback,options){
 				successCallback(data);  
 			}
 		},
-		error: function error(xhr,type,errorThrown){ 
+		error: function(xhr,type,errorThrown){ 
 			//console.log(type);
 			mui.toast('网络异常，请稍后重试');
-			errorCallback(); 
 		} 
 	});
 };

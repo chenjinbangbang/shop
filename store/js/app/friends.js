@@ -22,7 +22,7 @@ mui.init({
 		container: '#refreshContainer',
 		//下拉刷新
 		down: {
-			style: 'circle',
+			//style: 'circle',
 			callback: function(){
 				setTimeout(function(){
 					//结束下拉刷新
