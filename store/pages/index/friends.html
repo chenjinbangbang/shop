@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.css"/>
+    	<link rel="stylesheet" href="../../css/app.css"/>
+		<style>
+			.mui-content{ margin-top:20px;}
+			.mui-bar-nav{ border-bottom:1px solid #eee;}
+			
+			.friends-tabs{ height:40px; background-color:#fff;}
+			.friends-tabs .mui-scroll{ height:40px; display:flex; align-items:center; justify-content:space-around; text-align:center;}
+			.friends-tabs .mui-scroll a{ height:40px; line-height:40px; color:#000;}
+			.friends-tabs .mui-scroll a.mui-active{ color:#E80056; border-bottom:2px solid #E80056;}
+			
+			.firends-content{}
+			.firends-content .mui-card{ box-shadow:none;}
+			.firends-content .mui-card .mui-card-media img{width:38px; height:38px; border-radius:8px;}
+			.firends-content .mui-card .mui-card-media .mui-media-body{ position:relative;}
+			.firends-content .mui-card .mui-card-media .mui-media-body p:nth-child(2){ color:#333; font-size:16px; margin-bottom:4px;}
+			.firends-content .share{ position:absolute; right:0; top:5px; border-radius:20px; border:1px solid #E80056; padding:1px 8px; color:#E80056 !important;}
+			.firends-content .share .iconfont{ font-size:12px;}
+			.firends-content .share .shareVal{ font-weight:normal;}
+			.firends-content .mui-card .mui-card-content{ padding:10px;}
+			.firends-content .mui-card .mui-card-content p{ color:#666; margin-bottom:10px;}
+			.firends-content .mui-card .mui-card-content img{}
+			
+			.firends-content .mui-card .share{ color:#f00;}
+		</style>
+	</head>
+	<body>
+		
+		<div class="androidTop"></div>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">朋友圈</h1>
+		</header>
+		
+		<!--下拉刷新容器-->
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+			
+		  <div class="mui-scroll">
+		    <div class="mui-slider">
+				
+				<div class="friends-tabs">
+					<div class="friends-tabs mui-scroll-wrapper mui-slider-indicator mui-segmentd-control mui-segmented-control-inverted">
+						<div class="mui-scroll">
+							<a class="mui-control-item mui-active" href="#tab1">每日爆款</a>
+							<a class="mui-control-item" href="#tab2">分享赚</a>
+							<a class="mui-control-item" href="#tab3">宣传素材</a>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="mui-slider-group firends-content">
+					<div id="tab1" class="mui-slider-item mui-control-content mui-active">
+						<div class="mui-card">
+							<div class="mui-card-header mui-card-media">
+								<img src="../../imgs/1.jpg" alt="" />
+								<div class="mui-media-body">
+									<div class="share">
+										<span class="iconfont icon-share"></span>
+										<span class="shareVal">1.8w</span>
+									</div>
+									<p>每日爆款</p>
+									<p>发表于 2018-10-10 10:15:15</p>
+								</div>
+							</div>
+							<div class="mui-card-content">
+								<p>分享赚常见问题解答</p>
+								<img src="../../imgs/1.jpg" alt="" />
+							</div>
+							<!--<div class="mui-card-footer">
+								<p>分享 <span class="share">22</span></p>
+							</div>-->
+						</div>
+						
+						<div class="mui-card">
+							<div class="mui-card-header mui-card-media">
+								<img src="../../imgs/4.jpg" alt="" />
+								<div class="mui-media-body">
+									<div class="share">
+										<span class="iconfont icon-share"></span>
+										<span class="shareVal">1.8w</span>
+									</div>
+									<p>每日爆款</p>
+									<p>发表于 2018-10-10 10:15:15</p>
+								</div>
+							</div>
+							<div class="mui-card-content">
+								<p>分享赚常见问题解答</p>
+								<img src="../../imgs/4.jpg" alt="" />
+							</div>
+							<!--<div class="mui-card-footer">
+								<p>分享 <span class="share">22</span></p>
+							</div>-->
+						</div>
+					</div>
+					
+					<div id="tab2" class="mui-slider-item mui-control-content">
+						<div class="mui-card">
+							<div class="mui-card-header mui-card-media">
+								<img src="../../imgs/2.jpg" alt="" />
+								<div class="mui-media-body">
+									<div class="share">
+										<span class="iconfont icon-share"></span>
+										<span class="shareVal">1.8w</span>
+									</div>
+									<p>分享赚</p>
+									<p>发表于 2018-10-10 10:15:15</p>
+								</div>
+							</div>
+							<div class="mui-card-content">
+								<p>分享赚常见问题解答</p>
+								<img src="../../imgs/2.jpg" alt="" />
+							</div>
+							<!--<div class="mui-card-footer">
+								<p>分享 <span class="share">22</span></p>
+							</div>-->
+						</div>
+					</div>
+					
+					<div id="tab3" class="mui-slider-item mui-control-content">
+						<div class="mui-card">
+							<div class="mui-card-header mui-card-media">
+								<img src="../../imgs/3.jpg" alt="" />
+								<div class="mui-media-body">
+									<div class="share">
+										<span class="iconfont icon-share"></span>
+										<span class="shareVal">1.8w</span>
+									</div>
+									<p>宣传素材</p>
+									<p>发表于 2018-10-10 10:15:15</p>
+								</div>
+							</div>
+							<div class="mui-card-content">
+								<p>分享赚常见问题解答</p>
+								<img src="../../imgs/3.jpg" alt="" />
+							</div>
+							<!--<div class="mui-card-footer">
+								<p>分享 <span class="share">22</span></p>
+							</div>-->
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		  </div>
+		</div>
+
+		
+		<script src="../../js/mui.min.js"></script> 
+		<script src="../../js/app.js"></script>
+		<script src="../../js/app/friends.js"></script> 
+	</body>
+	
+</html>

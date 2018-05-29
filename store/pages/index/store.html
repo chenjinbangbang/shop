@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.css"/>
+    	<link rel="stylesheet" href="../../css/app.css"/>
+    	<link rel="stylesheet" href="../../fonts/iconfont.css"/>
+		<style>
+			.mui-bar-nav{ border-bottom:1px solid #eee;}
+			
+			.search{ height:60px; display:flex; justify-content: center; align-items: center; background-color:#f5f5f5; margin-top:20px;} 
+			.search .mui-search{ width:92%;}
+	    	.search .mui-search input{ background-color:#fff; border-radius:50px;}
+
+	    	.wrapper{}
+	    	.wrapper-left{}
+	    	.wrapper-right{}
+	    	.wrapper .mui-scroll-wrapper{ margin-top:110px;}
+	    	.wrapper .mui-scroll-wrapper:nth-child(1){ width:100px; text-align:center;}
+	    	.wrapper .mui-scroll-wrapper:nth-child(1) ul{}
+	    	.wrapper .mui-scroll-wrapper:nth-child(1) ul li{ padding:15px 0; border-bottom:1px solid #ddd;}
+	    	.wrapper .mui-scroll-wrapper:nth-child(1) ul li.active{ background-color:#fff; font-size:18px; font-weight:bold;}
+	    	.wrapper .mui-scroll-wrapper:nth-child(1) ul li.active:before{ content:''; position:absolute; width:5px; height:28px; background-color:#E80056; left:0; margin-top:-4px;}
+	    	
+	    	.wrapper .mui-scroll-wrapper:nth-child(2){ width:calc(100% - 100px); left:100px; background-color:#fff;}
+			.wrapper .mui-scroll-wrapper:nth-child(2) .title{ padding:15px 10px; font-size:16px;}
+			.wrapper .mui-media-object{ margin-top:10px;}
+			.wrapper .mui-media-body{}
+			.wrapper .mui-media-body p{}
+			.wrapper .mui-media-body p:nth-child(1){ font-size:16px; color:#000;}
+			.wrapper .mui-media-body p:nth-child(2){}
+			.wrapper .mui-media-body p:nth-child(3){ color:#E80056;}
+		</style>
+	</head>
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title">商城</h1>
+		</header>
+		
+		<div class="mui-content">
+			
+			<div class="search">
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear" name="" required="" placeholder="搜索商城" id="search">
+				</div>
+			</div>
+			
+	
+			<div class="wrapper">
+				
+				<div class="mui-scroll-wrapper wrapper-left">
+				    <div class="mui-scroll">
+				        <!--这里放置真实显示的DOM内容-->
+				        <ul>
+				        	<li class="active">常去商城</li>
+				        	<li>热门商家</li>
+				        	<li>食品日用</li>
+				        	<li>热门商家</li>
+				        	<li>旅行票务</li>
+				        	<li>母婴美妆</li>
+				        	<li>服饰鞋包</li>
+				        	<li>数码书籍</li>
+				        	<li>医药保健</li>
+				        	<li>其他</li>
+				        </ul>
+				    </div>
+				</div>
+				
+				<div class="mui-scroll-wrapper wrapper-right">
+				    <div class="mui-scroll">
+				        <!--这里放置真实显示的DOM内容-->
+				        <div class="title">常去商城</div>
+				        <ul class="mui-table-view">
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/1.jpg">
+				                    <div class="mui-media-body">
+				                        <p>京东</p>
+				                        <p class="mui-ellipsis">够真，够快，够便宜！</p>
+				                        <p>最高返5.6%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/2.jpg">
+				                    <div class="mui-media-body">
+				                        <p>苏宁</p>
+				                        <p class="mui-ellipsis">正品网购，上苏宁易购</p>
+				                        <p>最高返4%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/3.jpg">
+				                    <div class="mui-media-body">
+				                        <p>当当网</p>
+				                        <p class="mui-ellipsis">正品低价，海量图书，天天特价</p>
+				                        <p>最高返4.2%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/1.jpg">
+				                    <div class="mui-media-body">
+				                        <p>唯品会</p>
+				                        <p class="mui-ellipsis">全球精选，正品特卖</p>
+				                        <p>最高返2.1%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/4.jpg">
+				                    <div class="mui-media-body">
+				                        <p>网易考拉</p>
+				                        <p class="mui-ellipsis">网易自营海购平台，正品急速</p>
+				                        <p>最高返4.2%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/1.jpg">
+				                    <div class="mui-media-body">
+				                        <p>京东</p>
+				                        <p class="mui-ellipsis">够真，够快，够便宜！</p>
+				                        <p>最高返5.6%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/2.jpg">
+				                    <div class="mui-media-body">
+				                        <p>苏宁</p>
+				                        <p class="mui-ellipsis">正品网购，上苏宁易购</p>
+				                        <p>最高返4%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/3.jpg">
+				                    <div class="mui-media-body">
+				                        <p>当当网</p>
+				                        <p class="mui-ellipsis">正品低价，海量图书，天天特价</p>
+				                        <p>最高返4.2%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/1.jpg">
+				                    <div class="mui-media-body">
+				                        <p>唯品会</p>
+				                        <p class="mui-ellipsis">全球精选，正品特卖</p>
+				                        <p>最高返2.1%</p>
+				                    </div>
+				                </a>
+				            </li>
+				            <li class="mui-table-view-cell mui-media">
+				                <a href="javascript:;">
+				                    <img class="mui-media-object mui-pull-left" src="../../imgs/4.jpg">
+				                    <div class="mui-media-body">
+				                        <p>网易考拉</p>
+				                        <p class="mui-ellipsis">网易自营海购平台，正品急速</p>
+				                        <p>最高返4.2%</p>
+				                    </div>
+				                </a>
+				            </li>
+				        </ul>
+				    </div>
+				</div>
+				
+			</div>
+			
+			
+			
+			
+		</div>
+		
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/app.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			//滚动设置
+			mui('.mui-scroll-wrapper').scroll({
+				scrollY: true,
+				scrollX: false,
+				startX: 0,
+				startY: 0,
+				indicators: true,
+				deceleration: 0.0005,
+				bounce: true
+			});
+		</script>
+	</body>
+	
+</html>

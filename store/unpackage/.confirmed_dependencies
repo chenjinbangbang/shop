@@ -1,0 +1,59 @@
+{
+	"index.html": {
+		"refer": [
+			"personal.html",
+			"pages/index/store.html",
+			"pages/index/search.html",
+			"pages/index/friends.html",
+			"pages/index/home.html",
+			"pages/index/personal.html"
+		],
+		"resources": [
+			"pages/index/home.html",
+			"pages/index/search.html"
+		]
+	},
+	"personal.html": {
+		"refer": [
+			"index.html"
+		],
+		"resources": []
+	},
+	"pages/index/friends.html": {
+		"resources": [
+			"pages/index/friends_sub.html"
+		],
+		"refer": [
+			"pages/index/friends_sub.html"
+		]
+	},
+	"pages/index/home.html": {
+		"refer": [
+			"pages/detail.html",
+			"pages/searchPage.html",
+			"pages/goodsList.html",
+			"pages/theme.html",
+			"pages/ddq.html"
+		],
+		"resources": []
+	},
+	"pages/index/personal.html": {
+		"refer": [
+			"pages/personal/orders.html",
+			"pages/personal/settings.html",
+			"pages/personal/fans.html"
+		],
+		"resources": []
+	},
+	"pages/goodsList.html": {
+		"refer": [
+			"pages/detail.html"
+		],
+		"resources": []
+	},
+	"pages/detail.html": {
+		"refer": [
+			"pages/goodsList.html"
+		]
+	}
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title></title>
+    <link rel="stylesheet" href="css/mui.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="fonts/iconfont.css"/>
+    <style>
+    	.hide{ display:none;}
+    	.title{ background-color:rgba(0,0,0,0.5);}
+    	.title h1{}
+    	
+		.mui-content{ padding-bottom:20px;}
+		.mui-action-back{ color:#000;}
+		.mui-icon{ /*border:1px solid #f00;*/}
+		.mui-active .mui-tab-label,.mui-active .mui-icon{ color:#E80056;}
+		
+		.icon{}
+		.iconfont{ font-size:18px !important; padding-top:4px !important; /*width:22px !important; height:22px !important; font-size:16px !important*/;}
+    </style>
+</head>
+<body>
+	
+	<!--<header class="mui-bar mui-bar-nav hide mui-bar-transparent">
+		<h1 class="mui-title">首页</h1>
+	</header>-->
+	
+	<nav class="mui-bar mui-bar-tab">
+		<a class="mui-tab-item mui-active" href="pages/index/home.html">
+			<span class="mui-icon mui-icon-home"></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+	    <a class="mui-tab-item" href="pages/index/search.html">
+			<!--<span class="mui-icon">
+				<svg class="icon" aria-hidden="true">
+				  <use xlink:href="#icon-search"></use>
+				</svg>
+			</span>
+			<span class="mui-tab-label" style="margin-top:-7px;">搜索</span>-->
+			<span class="mui-icon mui-icon-search"></span>
+			<span class="mui-tab-label">搜索</span>
+		</a>
+	    <a class="mui-tab-item" href="pages/index/friends.html">
+			<span class="mui-icon mui-icon-contact" style="color:#F45118;"></span>
+			<span class="mui-tab-label">朋友圈</span>
+		</a>
+		<a class="mui-tab-item" href="pages/index/store.html">
+			<span class="mui-icon iconfont icon-store"></span>
+			<span class="mui-tab-label">商城</span>
+		</a>
+	    <a class="mui-tab-item" href="pages/index/personal.html">
+			<span class="mui-icon mui-icon-person"></span>
+			<span class="mui-tab-label">个人中心</span>
+		</a>
+	</nav>
+	
+	<script src="js/mui.js"></script>
+	<script src="js/app.js"></script>
+	<script src="fonts/iconfont.js"></script>
+	<script> 
+		
+		mui.init();  
+		
+		
+		
+		//关闭页面，1。点击包含.mui-actiion-back类的控件，2.在屏幕内，向右快速滑动，2.Android手机按下back按键
+		var firstBack; 
+		mui.back = function(){
+			if(firstBack){
+				if(new Date().getTime() - firstBack < 1000){
+					plus.runtime.quit();
+				}
+			}else{
+				firstBack = new Date().getTime();
+				mui.toast('再按一次退出应用');
+				setTimeout(function(){
+					firstBack = null;
+				},1000);
+			}
+		}
+		
+		//跳转页面
+		var Index = 0; //默认打开首页显示的子页序号
+    	var subPages = ['pages/index/home.html','pages/index/search.html','pages/index/friends.html','pages/index/store.html','pages/index/personal.html'];
+    	var subPageStyle = {
+    		top: '0',
+    		bottom: '50px'
+    	};
+    	
+    	//窗体管理
+    	mui.plusReady(function(){ 
+    		
+    		//plus.navigator.setFullscreen(true);
+    		//console.log(plus.navigator.getStatusbarHeight()); //获取状态栏的高度（20px）
+    		
+    		var self = plus.webview.currentWebview(); //获取当前的窗体
+    		//console.log(self.getURL()); 
+    		
+    		//首页隐藏标题
+    		/*let p = self.getURL();
+    		console.log(p);
+    		if(p.indexOf('pages/index/home.html') >= 0){
+    			document.querySelector('.mui-bar').classList.add('hide');
+    		}*/
+    		
+    		for(var i=0;i<subPages.length;i++){
+    		
+    			var sub = plus.webview.create(subPages[i],subPages[i],subPageStyle); //创建窗体
+
+    			sub.hide(); //所有窗体都隐藏 
+    			//如不是我们设置的默认的子页则隐藏，否则添加到窗口中
+		        /*if (i != Index) {  
+		            sub.hide();
+		        }*/
+    			self.append(sub); //把窗体追加到self中
+    		} 
+
+    		plus.webview.show(subPages[0]); //显示subPages[0]的窗体
+    		 
+    		//跳转到登录页面
+    		/*var loginPage = 'pages/login.html';
+    		mui.openWindow({
+				url: loginPage,
+				id: loginPage,
+				waiting: {
+					autoShow: false,
+				}
+			}); */
+    		
+    	});
+    	
+    	//点击底部导航跳转页面   
+    	var activeTab = subPages[Index];
+    	mui('.mui-bar-tab').on('tap','a',function(){ 
+    		//var self = plus.webview.currentWebview(); //获取当前的窗体
+    		var targetTab = this.getAttribute('href');
+    		if (targetTab == activeTab) {
+		        return;
+		    }
+    		
+    		/*if(page == 'pages/index/personal.html'){
+    			if(!judge_login_status()){
+    				var loginPage = 'pages/login.html';
+		    		mui.openWindow({
+						url: loginPage,
+						id: loginPage,
+						show: { 
+							autoShow: true,
+							aniShow: "slide-in-bottom",
+							duration: 500
+						}, 
+						waiting: { 
+							autoShow: false,
+						}
+					}); 
+    			}else{ 
+    				return true;
+    			}
+    		}*/
+    		
+    		//var w = plus.webview.all();  //返回所有窗体，包括为显示的webview窗口，进行叠加
+ 
+    		
+    		/*for(var i=0;i<w.length;i++){
+    			console.log(w[i].getURL());
+    			//plus.webview.hide(w[i].getURL());
+    		}*/
+    		
+    		plus.webview.show(targetTab,"fade-in",200);
+    		plus.webview.hide(activeTab);
+    		
+    		//更改当前活跃的选项卡
+    		activeTab = targetTab;
+    		
+    		//改变状态栏的字体颜色
+    		if(targetTab == 'pages/index/search.html' || targetTab == 'pages/index/personal.html'){
+    			plus.navigator.setStatusBarStyle( "light" );  
+    		}else{
+    			plus.navigator.setStatusBarStyle( "dark" );  
+    		}
+    		 
+    		
+    		//document.querySelector('.mui-title').innerHTML = this.querySelector('.mui-tab-label').innerHTML;
+    	}); 
+    	
+    	
+    
+      
+		
+	</script>
+	
+</body>
+</html>

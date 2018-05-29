@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.css"/>
+    	<link rel="stylesheet" href="../../css/app.css"/>
+    	<link rel="stylesheet" href="../../fonts/iconfont.css"/>
+		<style>
+			.mui-content{ margin-top:20px;}
+			
+			.orders-tabs{ background-color:#fff;}
+			.orders-tabs ul{ display:flex; justify-content:space-around; border-bottom:1px solid #ddd;}
+			.orders-tabs ul li{ height:40px; line-height:40px;}
+			.orders-tabs ul li.active{ color:#f00; border-bottom:2px solid #f00;}
+			
+			.orders-list{}
+			.orders-list .mui-table-view{}
+			.orders-list .mui-table-view li{}
+			.orders-list .price{ position:absolute; color:#f00; right:20px; font-size:16px;}
+		
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">订单</h1>
+		</header>
+		
+		<!--下拉刷新容器-->
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+		  <div class="mui-scroll">
+		    <div class="orders-tabs">
+				<ul id="orders-tabs1">
+					<li class="active">淘宝订单</li>
+					<li>京东订单</li>
+					<li>拼多多订单</li>
+				</ul>
+				
+				<ul id="orders-tabs2">
+					<li class="active">全部</li>
+					<li>已结算</li>
+					<li>未结算</li>
+				</ul>
+			</div>
+			
+			<div class="orders-list">
+				<ul class="mui-table-view">
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="../detail.html">
+				        	<div class="price">￥100</div>
+				            <img class="mui-media-object mui-pull-left" src="../../imgs/1.jpg">
+				            <div class="mui-media-body">
+				                男装
+				                <p class='mui-ellipsis'>2018-10-10 15:15:15</p>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="../detail.html">
+				        	<div class="price">￥50</div>
+				            <img class="mui-media-object mui-pull-left" src="../../imgs/2.jpg">
+				            <div class="mui-media-body">
+				                女装
+				                <p class='mui-ellipsis'>2018-10-10 15:15:15</p>
+				            </div>
+				        </a>
+				    </li>
+				    <li class="mui-table-view-cell mui-media">
+				        <a href="../detail.html">
+				        	<div class="price">￥200</div>
+				            <img class="mui-media-object mui-pull-left" src="../../imgs/3.jpg">
+				            <div class="mui-media-body">
+				               蓝牙耳机
+				                <p class='mui-ellipsis'>2018-10-10 15:15:15</p>
+				            </div>
+				        </a>
+				    </li>
+				</ul>
+			</div>
+		  </div>
+		</div>
+
+		<script src="../../js/mui.js"></script> 
+		<script src="../../js/app.js"></script>
+		<script src="../../js/app/orders.js"></script>
+	</body>
+	
+</html>

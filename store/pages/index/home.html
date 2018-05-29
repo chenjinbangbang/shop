@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.css"/>
+    	<link rel="stylesheet" href="../../css/app.css"/>
+    	<link rel="stylesheet" href="../../fonts/iconfont.css"/>
+    	<link  rel="stylesheet" href="../../js/jquery.mCustomScrollbar.css" />
+    	<script src="../../js/jquery-1.7.2.min.js"></script>
+		<script src="../../js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<!--<style name="statusBarStyle" parent="@android:style/Theme.DeviceDefault.Light">  
+			<item name="android:statusBarColor">@color/status_bar_color</item>  
+			<item name="android:windowLightStatusBar">false</item>
+		</style> -->
+		<style>
+			body,.mui-content{ background-color:#eee;}
+			
+			.topStatus_search{ width:100%; height:70px; top:0; left:0; position:fixed; z-index:100;
+				background: -webkit-linear-gradient(top,rgba(0,0,0,0.4),rgba(0,0,0,0.05));
+			}
+			
+			.search{ width:100%; padding:5px 10px 5px 10px; display:flex;}
+			.search .mui-search{ flex:1; margin:0;}
+	    	.search .mui-search input{ background-color:#eee; border-radius:50px;}
+	    	.search .message{ width:40px; text-align:right; position:relative;}
+	    	.search .message span{ font-size:22px; margin-top:5px; display:inline-block; color:#ddd;}
+	    	.search .message .messageTip{ width:10px; height:10px; border-radius:50%; background-color:#f00; border:1px solid #fff; position:absolute; right:-3px; top:-2px;}
+	    	
+	    	.classify{ background-color:#fff; padding:10px; }
+	    	.classify ul{ display:flex; flex-wrap:wrap;}
+	    	.classify ul li{ width:20%; text-align:center;}
+	    	.classify ul li .icon{ height:50px; display:flex; justify-content: center; align-items:center;}
+	    	.classify ul li .icon img{ width:45px;}
+	    	.classify ul li p{}  
+	    	
+	    	.activity{ margin:10px 5px 0 5px; background-color:#fff; border-radius:20px;  position:relative; overflow:hidden;}
+	    	.activity .t{ height:45px; display:flex; justify-content: center; align-items:center;}
+	    	.activityBg0{ background: -webkit-linear-gradient(left, #FA79A0 , #D061F0);}
+	    	.activityBg1{ background: -webkit-linear-gradient(left, #D8A2FD , #BF65FD) !important;}
+	    	.activityBg2{ background: -webkit-linear-gradient(left, #FCA56D , #FA6608) !important;}
+	    	/*.jdt h4{ color:#B47C6A !important;}
+	    	.activity .t>div{ position:relative;}
+	    	.activity .t>div p{ background: -webkit-linear-gradient(left, #D470F7 , #9B3AF4); position:absolute; font-size:12px; color:#ddd; border-radius:20px; padding:0 5px; left:-75px; top:10px;}*/
+	    	.activity .t>div h4{ padding:10px 0; font-family:myFont; font-size:18px; font-weight:bold;  color:#fff; text-align: center;}
+	    	.activity .t a{ position:absolute; right:10px; color:#ddd; margin-top:12px;}
+	    	/*.activity .t span{ font-size:14px;} 
+	    	.activity .t span.mui-icon{ font-size:18px;} */
+	    	
+			.activity .tt{ display:flex; flex-wrap:wrap; background-color:#fff; margin:5px 0;}
+			.activity .tt li{ width:50%; padding:3px;}
+			.activity .tt li a{ display:flex;}
+			.activity .activity-left{ flex:1; margin-right:5px;}
+			.activity .activity-left .title{ font-size:18px; font-weight:500; text-align:left;}
+			.activity .activity-left .name{ font-size:15px; margin:5px 0;}
+			.activity .activity-left .img{}
+			.activity .activity-left .img img{ width:100%;}
+			.activity .activity-left .tip{ display:inline-block; padding:0 5px; background: -webkit-linear-gradient(left, #F75956 , #FC2E95); color:#fff; text-align: center; border-radius:4px; font-size:12px;}
+			.activity .activity-right{ flex:1; display:flex; justify-content: center; align-items:center;}
+			.activity .activity-right img{ border-radius:8px; max-width:100%; border:1px solid #eee; max-height:100%;}
+			.titleColor0{ color:#B64C4C;
+				/*实现字体渐变*/
+				/*background-image: -webkit-gradient(linear, 0 0, right 0, from(#F75956), to(#B22A9C));
+	    		-webkit-background-clip: text;
+	    		-webkit-text-fill-color: transparent;*/
+    		}
+    		.titleColor1{ color:#3D96D8; }
+    		.titleColor2{ color:#8DA3BF; }
+    		.titleColor3{ color:#BF4A66; } 
+	    	
+	    	.view{ border-top:2px solid #f00; margin-top:25px; /*background: -webkit-linear-gradient(top, #B8FF87 , #fff);*/ /*border-top:1px solid #eee; border-bottom:1px solid #eee;*/}
+	    	.view-title{ width:120px; height:45px; line-height:45px; background:url(../../imgs/titlebg.gif) no-repeat center top; background-size:100% 100%;  position:absolute; z-index:10; margin-top:-10px; margin-left:10px;}
+	    	.view-title div{ font-family:myFont; text-align: center; font-size:18px; font-weight:bold; color:#fff;}	    	
+	    	
+	    	.view .made{ height:240px; padding-left:10px; margin-top:10px; overflow-x:auto; -webkit-overflow-scrolling: touch;} 
+	    	.view .made .madegame ul{ width:3000px;}
+	    	.view .made .madegame ul li{ width:160px; float:left; display:inline-block; position:relative; padding:0; margin:0 5px; border-radius:8px; position:relative; overflow:hidden;}
+	    	.view .made .madegame ul li span{ display:block;}
+	    	.view .made .madegame ul li .img{ display:flex; justify-content:center; align-items:center; height:160px;}
+	    	.view .made .madegame ul li .img img{ width:100%; width:100%; height:100%;}
+			.view .title{ height:50px; padding:20px 10px; color:#999; background-color:#FDF3F4; display:block; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+	    	.view .title1{  position:absolute; width:120px; left:20px; font-size:16px; border-radius:20px; text-align:center; top:145px; height:30px; line-height:30px; color:#B1405A; background-color:#FDF3F4; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+	    	.view .price{ width:90%; margin:auto; position:relative; overflow:hidden; border:1px solid #FA6477; border-radius:8px;}
+	    	.view .price div{ height:20px; line-height:20px; font-size:14px;}
+	    	.view .price .price-top{ background-color:#FA6477; color:#fff;}
+	    	.view .price .price-foot{ color:#FA6477;} 
+	    	
+	    	.goods{ background-color:#fff; margin-top:10px;}
+	    	.goods .goodsTab{ padding:10px 0; border-bottom:1px solid #eee; display:flex; justify-content: space-around;}
+			.goods .goodsTab li{ border:none; color:#333; border-radius:20px; padding:3px 20px;} 
+			.goods .goodsTab li.active{ color:#fff; background-color:#F8454D;}
+		</style>
+	</head>
+	<body>
+		
+		<div class="topStatus_search">
+			<!--顶部白色背景-->  
+			<div class="topStatus"></div>
+			
+			<div class="search">
+				<div class="mui-input-row mui-search">
+					<input type="search" class="mui-input-clear" name="" required="" placeholder="搜索商品名称/淘宝宝贝标题" id="search">
+				</div>
+				<div class="message">
+					<span class="messageTip"></span>
+					<span class="iconfont icon-message"></span>
+				</div> 
+			</div>
+		</div>
+
+	
+		<!--下拉刷新容器-->
+		<div id="refreshContainer" class="mui-content wrapper  mui-scroll-wrapper">
+		  <div class="mui-scroll">
+
+			<!--轮播图-->
+			<div class="mui-slider banner">
+				<!--<div class="mui-slider-group mui-slider-loop">
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="../../imgs/4.jpg"/>
+						</a> 
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../../imgs/1.jpg"/>
+						</a> 
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../../imgs/2.jpg"/>
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../../imgs/3.jpg"/>
+						</a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#">
+							<img src="../../imgs/4.jpg"/>
+						</a> 
+					</div>
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#">
+							<img src="../../imgs/1.jpg"/>
+						</a>
+					</div>
+				</div>
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>-->
+			</div>
+
+			<!--分类栏目-->
+			<div class="classify">
+				<!--<ul>
+					<li>
+						<a href="../theme.html">
+							<div class="icon">
+								<img src="../../imgs/icon1.png" alt="" />
+							</div>
+							<p>主题街</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="../../imgs/icon.png" alt="" />
+							<p>叮咚抢</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<img src="../../imgs/icon1.png" alt="" />
+							<p>拼购</p>
+						</a>
+					</li> 
+					<li>
+						<a href="#">
+							<img src="../../imgs/icon.png" alt="" />
+							<p>主题街</p>
+						</a>
+					</li>
+				</ul>-->
+			</div>
+			
+			
+
+			<!--专区栏目-->
+			<div id="column">
+				
+				<!--<div class="activity">
+					<div class="t">
+						<div><h4>淘宝专区</h4></div>
+					</div>
+					
+					<ul class="tt">
+						<li>
+							<a href="detail.html">
+								<div class="activity-left">
+									<p class="title titleColor0">有好货</p>
+									<p class="name">高颜值美物</p>
+									<div class="img">
+										<img src="../../imgs/7.png" alt="" />
+									</div>
+								</div>
+								<div class="activity-right">
+									<img src="../../imgs/6.png" alt="" />
+								</div>
+							</a>
+						</li> 
+					</ul>
+
+					<div class="view">
+						<div class="view-title">
+							 <div>今日精选</div>
+							 <div></div>
+						</div>
+						
+						<div class="made scrollbox">
+						    <div class="madegame">
+						    	<ul id="ho">
+						    		<li>
+						                <a href="../detail.html">
+								            <span class="img">
+							            		<img src="../../imgs/1.jpg" alt="" />
+								            </span>
+								            <span class="title">韩潮男装韩潮男装韩潮男装</span>
+								            <div class="title1">#潮流盛典</div>
+								        </a>
+						            </li>
+						            <li>						            	
+						                <a href="../detail.html">
+								            <span class="img">
+							            		<img src="../../imgs/1.jpg" alt="" />
+								            </span>
+								            <span class="title">韩潮男装韩潮男装韩潮男装</span>
+								            <div class="title1">#潮流盛典</div>
+								        </a>						               
+						            </li>
+						            <li>
+						                <a href="../detail.html">
+								            <span class="img">
+							            		<img src="../../imgs/1.jpg" alt="" />
+								            </span>
+								            <span class="title">韩潮男装韩潮男装韩潮男装</span>
+								            <div class="title1">#潮流盛典</div>
+								        </a>
+						            </li>
+						            <li>
+						                 <a href="../detail.html">
+								            <span class="img">
+							            		<img src="../../imgs/1.jpg" alt="" />
+								            </span>
+								            <span class="title">韩潮男装韩潮男装韩潮男装</span>
+								            <div class="title1">#潮流盛典</div>
+								        </a>
+						            </li>
+						            <li>
+						                 <a href="../detail.html">
+								            <span class="img">
+							            		<img src="../../imgs/1.jpg" alt="" />
+								            </span>
+								            <span class="title">韩潮男装韩潮男装韩潮男装</span>
+								            <div class="title1">#潮流盛典</div>
+								        </a>
+						            </li>
+						            <li>
+						                 <a href="../detail.html">
+								            <span class="img">
+							            		<img src="../../imgs/1.jpg" alt="" />
+								            </span>
+								            <span class="title">韩潮男装韩潮男装韩潮男装</span>
+								            <div class="title1">#潮流盛典</div>
+								        </a>
+						            </li>
+						    	</ul>
+						    </div>	 
+						</div>
+					</div>	
+				</div>-->
+			</div>
+			
+			<div class="goods hide">
+			  <ul class="goodsTab">
+			  	<li class="active" title="tb">淘宝</li>
+			  	<li title="jd">京东</li>
+			  	<li title="pdd">拼多多</li>
+			  </ul>
+
+			  <div class="like">
+			  	<div class="nodata hide">没有更多的数据哦！</div>
+				<ul id="list">
+					<!--<li>
+						<a href="../detail.html">
+							<div class="like-left">
+								<img src="../../imgs/1.jpg" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">爱奇艺VIP黄金会员月卡 爱奇艺会员1个月</div>
+								<div class="commission">预估佣金:￥6.32</div>
+								<div class="price">
+									<p><span>￥</span>19.9</p>
+									<p>月销49118</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥69.9</p>
+									<div class="ticket">
+										<span class="coupon">券￥100</span>
+										<span class="iconfont icon-couponss"></span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="../detail.html">
+							<div class="like-left">
+								<img src="../../imgs/2.jpg" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">爱奇艺VIP黄金会员月卡 爱奇艺会员1个月</div>
+								<div class="commission">预估佣金:￥6.32</div>
+								<div class="price">
+									<p><span>￥</span>19.9</p>
+									<p>月销49118</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥69.9</p>
+									<div class="ticket">
+										<span class="coupon">券￥100</span>
+										<span class="iconfont icon-couponss"></span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="../detail.html">
+							<div class="like-left">
+								<img src="../../imgs/3.jpg" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">爱奇艺VIP黄金会员月卡 爱奇艺会员1个月</div>
+								<div class="commission">预估佣金:￥6.32</div>
+								<div class="price">
+									<p><span>￥</span>19.9</p>
+									<p>月销49118</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥69.9</p>
+									<div class="ticket">
+										<span class="coupon">券￥100</span>
+										<span class="iconfont icon-couponss"></span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>--> 
+				</ul>
+			</div>
+			</div>
+
+		 </div>
+		  
+		</div>
+
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/vue.min.js"></script>
+		<script src="../../js/md5.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/app/home.js"></script>
+		
+	</body>
+	
+</html>

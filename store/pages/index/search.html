@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.css"/>
+    	<link rel="stylesheet" href="../../css/app.css"/>
+    	<link rel="stylesheet" href="../../fonts/iconfont.css"/>
+		<style>
+			body,.mui-content{ background-color:#fff;}
+			
+			.mui-bar-nav{ margin-top:20px; background:none;}
+			.mui-bar-nav .mui-icon{ color:#fff;}
+			.mui-bar-nav .mui-title{ color:#fff;}
+			.mui-bar-nav .right{ color:#fff; position:absolute; right:15px; top:12px; font-size:16px;}
+			.mui-content{ margin-top:-45px;}
+			
+			.search-top{ background: -webkit-linear-gradient(top, #E80056 , #8F1A96); /*background-color:#EF3C4A;*/ padding-top:70px}
+			
+			.tabs{ width:98%; margin:auto; font-family:myFont; font-size:16px; font-weight:bold; color:#fff; text-align: center; display:flex; justify-content:space-around;}
+			.tabs li{ flex:1; margin:0 1px; height:40px; line-height:40px; border-top-left-radius:12px; border-top-right-radius:12px; background-color:#DB045F;
+				/*梯形*/ 
+				/*border-top: 40px solid transparent;*/
+			    /*border-right: 20px solid transparent;
+			    border-bottom: 40px solid #f00;
+			    border-left: 20px solid transparent;*/
+			}
+			.tabs li.active{ opacity:1; font-weight:bold; background-color:#C10B71;}
+
+			.search{ height:150px; padding:70px 20px 0 20px; display:flex; position:relative; align-items:center; /*background-color:#FF5454;*/}
+			.search .tip{ font-family:myFont; font-size:18px; position:absolute; font-weight:bold; color:#fff; left:35%; top:20px; line-height:28px;}
+			.search .mui-input-row{ flex:8; margin-top:14px; margin-right:2px;}
+	    	.search .mui-input-row input{ background-color:#fff; border-radius:4px;}
+	    	.search button{ flex:1;}
+	    	
+	    	.storage{}
+			.storage .title{ padding:0 10px; height:40px; display:flex; justify-content:space-between; align-items:center;}
+			.storage .title h4{ color:#666; font-weight:normal; font-size:16px;}
+			.storage .title a{ color:#666;}
+			.storage ul{ display:flex; flex-wrap:wrap;}
+			.storage ul li{}
+			.storage ul li a{ display:inline-block; padding:3px 13px; margin:10px; background-color:#eee; border-radius:10px; color:#666;}
+
+		</style>
+	</head>
+	<body>
+		
+		<header class="mui-bar mui-bar-nav mui-bar-transparent">
+		    <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+		    <h1 class="mui-title">搜索</h1>
+		    <a href="#" class="right">查券教程</a>
+		</header>
+		
+		<div class="mui-content">
+			
+			<div class="search-top">
+				<ul class="tabs">
+					<li class="active">淘宝</li>
+					<li>京东</li>
+					<li>拼多多</li>
+				</ul>
+				
+				<div class="search">
+					<div class="tip">为您省，帮你赚<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;让您的消费产生价值</div>
+					<div class="mui-input-row mui-search">
+						<input type="search" class="mui-input-clear" placeholder="宝贝标题/关键词" id="search">
+					</div>
+					<button type="button" class="mui-btn mui-btn-warning">搜索</button>
+				</div>
+			</div>
+			
+			<div class="storage">
+				<div class="title">
+					<h4>大家都在找</h4>
+				</div>
+				<ul>
+					<li><a href="#">豆豆鞋</a></li>
+					<li><a href="#">男童鞋</a></li>
+					<li><a href="#">T恤</a></li>
+					<li><a href="#">雨伞</a></li>
+					<li><a href="#">包包</a></li>
+					<li><a href="#">拖鞋</a></li>
+					<li><a href="#">母亲节</a></li>
+					<li><a href="#">拖把</a></li>
+					<li><a href="#">运动鞋</a></li>
+				</ul>
+			</div>
+			
+		</div>
+		
+		<script src="../../js/mui.js"></script> 
+		<script src="../../js/app.js"></script>
+		<script src="../../js/app/search.js"></script>
+	</body>
+	
+</html>
