@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../fonts/iconfont.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content{ margin-top:20px;}
+			
+			.mui-bar-nav{}
+			.mui-bar-nav .mui-action-back{}
+			.mui-bar-nav h1{}
+			
+			.menu{ overflow-x:auto; background-color:#fff; border-bottom:1px solid #eee;}
+			.menu ul{ width:1000px; height:40px; display:flex; align-items:center; text-align:center; color:#333;}
+			.menu ul li{ width:80px;} 
+			.menu ul li.active{ font-size:16px; color:#EA1C17;}
+			/*.menu ul li .mui-icon{ font-size:18px;}
+			.menuIcon{ margin-right:20px; padding:3px 5px; font-size:20px !important; margin-top:5px;}*/
+			
+
+		</style>
+	</head>
+
+	<body >
+		
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">通用栏目</h1>
+		</header>
+		
+		<!--下拉刷新容器-->
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+			
+		  <div class="mui-scroll">
+
+		    <div class="menu">
+		    	<!--<ul>
+		    		<li>
+		    			<div>
+		    				<span>综合</span>
+		    				<span class="mui-icon mui-icon-arrowdown"></span>
+		    			</div>
+		    		</li>
+		    		<li>
+		    			<div>
+		    				<span>券后价</span>
+		    				<span class="mui-icon mui-icon-arrowdown"></span>
+		    			</div>
+		    		</li>
+		    		<li>
+		    			<div>
+		    				<span>销量</span>
+		    				<span class="mui-icon mui-icon-arrowdown"></span>
+		    			</div>
+		    		</li>
+		    		<li>
+		    			<span class="mui-icon mui-icon-list menuIcon"></span>
+		    		</li>
+		    	</ul>-->
+		    	
+		    	<ul>
+		    		<li v-for="(type,index) in types" :class="{active: 0 === 0}" @click="typeFn(index)">{{type}}</li>
+		    	</ul>
+
+		    </div>
+			
+			
+		     
+		     <div class="like">
+		     	<!--<div class="nodata" v-if="lists.length <= 0">没有更多的数据哦！</div>-->
+		     	<ul id="list">
+					<li v-for="list in lists">
+						<a href="detail.html">
+							<div class="like-left">
+								<img :src="list.pic" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">{{list.title}}</div>
+								<div class="commission">预估佣金:￥{{list.yongjin}}</div>
+								<div class="price">
+									<p><span>￥</span>{{list.price}}</p>
+									<p>月销{{list.sales}}</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥{{list.o_price}}</p>
+									<div class="ticket">
+										<span class="coupon">券￥{{list.coupon}}</span>
+										<span class="iconfont icon-couponss"></span>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+		     </div>
+		  </div>
+		</div>
+		
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/app/goodsList.js"></script>
+	</body>
+
+</html>

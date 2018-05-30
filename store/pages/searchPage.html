@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content{ margin-top:20px; }
+
+			.search{ width:94%; margin:auto; display:flex; align-items:center; height:60px;}
+			.search .mui-search{ flex:1; margin-top:12px;} 
+			.search .mui-search input{ border-radius:20px;}
+			.search p{ width:50px; text-align:center;}
+			
+			.tabs{ background-color:#fff;}
+			.tabs{ display:flex; justify-content:space-around; border-bottom:1px solid #ddd;}
+			.tabs li{ height:40px; line-height:40px;}
+			.tabs li.active{ color:#f00; border-bottom:2px solid #f00;}
+			
+			.storage{ margin-top:15px;}
+			.storage .title{ padding:0 10px; height:40px; display:flex; justify-content:space-between; align-items:center;}
+			.storage .title h4{ color:#666; font-weight:normal;}
+			.storage .title a{ color:#666;}
+			.storage ul{ display:flex; flex-wrap:wrap;}
+			.storage ul li{}
+			.storage ul li a{ display:inline-block; padding:3px 13px; margin:10px; background-color:#eee; border-radius:20px; color:#666;}
+		</style>
+	</head>
+
+	<body>
+		
+		<div class="mui-content">
+			<div class="search">
+				<div class="mui-input-row mui-search">
+				    <input type="search" class="mui-input-clear searchIndex" placeholder="搜索商品名称">
+				</div>
+				<p class="mui-action-back mui-pull-left">取消</p>
+			</div>
+			
+		    <ul class="tabs">
+				<li class="active">淘宝</li>
+				<li>京东</li>
+				<li>拼多多</li>
+			</ul>
+			
+			<div class="storage">
+				<div class="title">
+					<h4>历史搜索</h4>
+					<a href="#"> <span class="mui-icon mui-icon-trash"></span> </a>
+				</div>
+				<ul>
+					<li><a href="#">女鞋</a></li>
+					<li><a href="#">男鞋</a></li>
+					<li><a href="#">内裤</a></li>
+					<li><a href="#">手机</a></li>
+				</ul>
+			</div>
+			
+			<div class="storage">
+				<div class="title">
+					<h4>热门搜索</h4>
+					<a href="#"> <span class="mui-icon mui-icon-trash"></span> </a>
+				</div>
+				<ul>
+					<li><a href="#">时尚女包</a></li>
+					<li><a href="#">手机</a></li>
+					<li><a href="#">防辐射绿植</a></li>
+					<li><a href="#">女鞋</a></li>
+					<li><a href="#">iphone</a></li>
+					<li><a href="#">拍立得</a></li>
+				</ul>
+			</div>
+				
+		</div>
+		
+		
+		<script src="../js/mui.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/app/searchPage.js"></script>
+	</body>
+
+</html>

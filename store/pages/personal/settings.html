@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/app.css" rel="stylesheet" />
+		<style type="text/css">
+			.settings-head{ text-align: center; padding:20px 0; background-color:#fff;}
+			.settings-head img{ width:70px; height:70px; border-radius:50%; display:block; margin:auto;}
+			.settings-head a{ color:#666; margin-top:5px; display:inline-block;}
+			
+			.mui-table-view{}
+			.mui-table-view li:nth-child(3n){ border-bottom:10px solid #f5f5f5;}
+			.mui-table-view span{ color:#999;}
+			.mui-table-view .list-left{}
+			.mui-table-view .list-right{ float:right; margin-right:20px;}
+			.mui-table-view .clearCache{ float:right; color:#f00; border-radius:10px; border:1px solid #f00; padding:0 5px;}
+			
+			.logout{ background-color:#fff; text-align:center; margin-top:10px; padding:10px 0;}
+			.logout a{ color:#666; font-size:16px;}
+		</style>
+	</head>
+
+	<body>
+		
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">设置</h1>
+		</header>
+		
+		<div class="mui-content">
+		    
+		    <div class="settings-head">
+		    	<img src="../../imgs/3.jpg" alt="" />
+		    	<a href="#">点击修改头像</a>
+		    </div>
+		    
+		    <ul class="mui-table-view">
+	            <li class="mui-table-view-cell">
+	                <a class="mui-navigate-right">
+	                    昵称
+	                    <span class="list-left">kudzu</span>
+	                    <span class="list-right">修改</span>
+	                </a>
+	            </li>
+	            <li class="mui-table-view-cell">
+	                <a class="mui-navigate-right">
+	                     支付宝绑定
+	                     <span class="list-right">未绑定</span>
+	                </a>
+	            </li>
+	            <li class="mui-table-view-cell">
+	                <a class="mui-navigate-right">
+	                     微信绑定
+	                     <span class="list-right">已绑定</span>
+	                </a>
+	            </li>
+	            <li class="mui-table-view-cell">
+	                <a class="mui-navigate-right">
+	                     修改手机号
+	                     <span class="list-right">修改</span>
+	                </a>
+	            </li>
+	            <li class="mui-table-view-cell">
+	                <a class="mui-navigate-right">
+	                     修改密码
+	                     <span class="list-right">修改</span>
+	                </a>
+	            </li>
+	            <li class="mui-table-view-cell">
+	                <a class="mui-navigate-right">
+	                     消息通知
+	                </a>
+	            </li>
+	            <li class="mui-table-view-cell">
+	                <a class="">
+	                     清除缓存
+	                     <span class="clearCache">清除缓存</span>
+	                </a>
+	            </li>
+	        </ul>
+	        
+	        <div class="logout">
+	       		<a href="#">退出登录</a>
+	        </div>
+	        
+		</div>
+		
+		<script src="../../js/mui.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/app/settings.js"></script>
+	</body>
+
+</html>

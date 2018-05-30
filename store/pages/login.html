@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content{}
+			
+			.loginTop{ background: -webkit-linear-gradient(top, #EA1C17 , #EA1C17); height:60px;}
+			
+			.logo{ margin-top:120px; text-align:center;}
+			.logo img{ width:80px;}
+			
+			.loginbtn{ width:80%; margin:auto; margin-top:30px; text-align:center;}
+			.loginbtn .mui-btn{ border-radius:30px; padding:8px;}
+			.loginbtn p{ margin:0 0 20px 0; }
+			.weixin{ background-color:#EA1C17; border:none;}
+			.phone{ border:1px solid #999 !important; color:#666 !important;}
+			.phone .mui-icon-phone{ color:#EA1C17; }
+			.loginbtn .mui-icon{ font-size:24px; }
+			
+			.mui-input-group { margin-top: 10px;}
+			.mui-input-group:first-child { margin-top: 20px;}
+			.mui-input-group label { width: 22%;}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea { nwidth: 78%;}
+			
+			.mui-content-padded { margin-top: 25px;}
+			.mui-btn { padding: 10px;}
+			
+			.oauth-area { nposition: absolute; bottom: 20px; left: 0px; text-align: center; width: 100%;
+				padding: 0px; margin: 0px;
+			}
+			
+			.oauth-area .oauth-btn { display: inline-block; width: 50px; height: 50px;
+				background-size: 30px 30px; 
+				background-position: center center;
+				background-repeat: no-repeat;
+				margin: 0px 20px;
+				/*-webkit-filter: grayscale(100%); */
+				border: solid 1px #ddd; border-radius: 25px;
+			}
+			
+			.oauth-area .oauth-btn:active { border: solid 1px #aaa;}
+			.oauth-area .oauth-btn.disabled { background-color: #ddd;}
+
+		</style>
+	</head>
+
+	<body>
+		
+		<!--<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">登录</h1>
+		</header>-->
+		
+		<div class="mui-content" id="login">
+			
+			<div class="loginTop">
+				
+			</div>
+
+			<div class="logo">
+				<img src="../imgs/icon.png" alt="" />
+			</div>
+			
+			<div class="loginbtn">
+				<button type="button" class="mui-btn mui-btn-blue mui-btn-block weixin">
+					<span class="mui-icon mui-icon-weixin"></span>
+					<span>微信登录</span>
+				</button>
+				<p>推荐使用微信一键登录，方便快捷</p>
+				<button @click="loginBtn" type="button" class="mui-btn mui-btn-blue mui-btn-block mui-btn-outlined phone">
+					<span class="mui-icon mui-icon-phone"></span>
+					<span>手机号登录</span>
+				</button>
+			</div>
+			
+			<!--<form id="login-form" class="mui-input-group">
+				<div class="mui-input-row">
+					<label for="">账号</label>
+					<input id="account" type="text" class="mui-input-clear mui-input" placeholder="请输入账号" name="" value="" />
+				</div>
+				<div class="mui-input-row"> 
+					<label for="">密码</label>
+					<input id="password" type="password" class="mui-input-clear mui-input" placeholder="请输入密码" name="" value="" />
+				</div>
+			</form>
+			<div class="mui-content-padded">
+				<button id="login" class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+			</div>-->
+			
+			<div class="mui-content-padded oauth-area">
+
+			</div>
+
+		</div>
+		
+		<script src="../js/mui.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/app/login.js"></script>
+	</body>
+
+</html>

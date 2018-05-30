@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<link href="../css/app.css" rel="stylesheet" />
+		<link href="../fonts/iconfont.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content{ margin-top:-44px;}
+			.icon{ width:20px; height:20px;}
+			.banner{}
+			
+			.back{ width:30px; height:30px; line-height:30px; text-align:center; background-color:rgba(0,0,0,0.3); border-radius:50%; position:absolute; top:40px; left:10px; z-index:10; color:#fff; font-size:26px;}
+			
+			.mui-bar{}
+			.mui-bar .mui-tab-item:nth-child(1){ width:1px; border-right:1px solid #ddd !important; color:#333;}
+			.mui-bar .mui-tab-item:nth-child(1).active{ color:#FF6400; }
+			.mui-bar .mui-tab-item:nth-child(2){ width:4px;}
+			.cart{ width:80%; margin:auto; display:flex; border-radius:20px; color:#fff; overflow:hidden; position:relative;}
+			.cart div{ flex:1; height:40px; line-height:40px;}
+			.cart div:first-child{ background-color:#FFA401;}
+			.cart div:last-child{ background-color:#FF6400;}
+			
+			.starToast{ height:60px; text-align:center;}
+			.starToast span{ display:block; margin-top:15px;}
+			.starToast .iconfont{ color:#FF6400; font-size:24px;}
+			.starToast .message{}
+			
+			.scrollToTop{ width:48px; height:48px; font-weight:bold; position:fixed; right:20px; bottom:60px; z-index:100; text-align: center; background-color:rgba(255,255,255,0.8); border:1px solid #ccc; border-radius:50%;}
+			.scrollToTop .mui-icon{ color:#999; font-size:26px;}
+			.scrollToTop p{ margin-top:-8px;}
+			
+			.title{ font-size:18px; padding:10px;}
+			.tip{ display:flex; justify-content: center;}
+			.tip li{ color:#999; padding:0; display:flex; font-size:13px;}
+			.tip li embed{ width:16px; height:16px; margin:2px;}
+			.goodsprice{ color:#f00; padding:15px 10px; margin-top:10px; border-top:1px solid #eee; border-bottom:1px solid #eee;}
+			.goodsprice span:nth-child(1){ font-size:18px;}
+			.goodsprice span:nth-child(2){ font-size:26px;}
+			
+			.mui-table-view p{ color:#333; margin-top:8px;}
+			.mui-table-view .btn{ position:absolute; right:0;}
+			.mui-table-view .btn .mui-btn{ border-radius:20px; margin-right:10px;}
+			
+			.comment{ padding:0 10px; display:flex; justify-content: space-between;}
+			.comment li{ color:#999; height:40px; line-height:40px;}
+			.comment li span{ color:#f00;}
+			
+			.evaluate{ padding:0 10px;}
+			.evaluate .top{ display:flex; height:40px; justify-content: space-between; align-items:center;}
+			.evaluate .top p{ color:#333;}
+			.evaluate .top a{ color:#f00;}
+			.evaluate .top a .mui-icon{ font-size:18px;}
+			.evaluate .label{ display:flex; flex-wrap:wrap;}
+			.evaluate .label li{ display:inline-block; padding:3px 13px; margin:10px; background-color:rgba(255,0,0,0.05); border-radius:20px; color:#666;}
+			
+			.mui-card-content{ padding:10px;}
+			
+			.detail{}
+			.detail .mui-control-item{ border:1px solid #f00 !important;}
+			.detail .mui-control-item.mui-active{ background-color:#f00 !important; color:#fff !important;}
+		</style> 
+	</head>
+	<body>  
+		<header class="mui-bar mui-bar-nav hide">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <!--<h1 class="mui-title">商品详情</h1>-->
+		</header>
+		
+		<nav class="mui-bar mui-bar-tab">
+		    <a class="mui-tab-item mui-active" id="collect">
+		        <span class="mui-icon iconfont icon-star"></span>
+		        <span class="mui-tab-label" id="star">收藏</span>
+		    </a>
+		    <a class="mui-tab-item">
+		        <div class="cart">
+		        	<div>加入购物车</div> 
+		        	<div>立即购买</div>
+		        </div>
+		    </a>
+		</nav>
+		
+		<!--顶部白色背景-->
+		<div class="topStatus hide"></div>
+		
+		<div class="scrollToTop hide" id="scrollToTop">
+			<span class="mui-icon mui-icon-arrowup"></span>
+			<p>顶部</p>
+		</div>
+		
+		<!--下拉刷新容器-->
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+			
+			<span class="back mui-action-back mui-icon mui-icon-back"></span>
+			
+		  <div class="mui-scroll banner">
+		    
+		    <div class="mui-slider">
+			    <div class="mui-slider-group">
+					<div class="mui-slider-item"><a href="#"><img src="../imgs/1.jpg"/></a></div>
+					<div class="mui-slider-item"><a href="#"><img src="../imgs/2.jpg"/></a></div>
+					<div class="mui-slider-item"><a href="#"><img src="../imgs/3.jpg"/></a></div>
+					<div class="mui-slider-item"><a href="#"><img src="../imgs/4.jpg"/></a></div>
+				</div>
+			</div>
+			
+			<div class="title">百草味-芒果干</div>
+			
+			<ul class="tip">
+				<li>
+					<embed src="../imgs/rightno.svg" width="300" height="100" 
+				type="image/svg+xml"
+				pluginspage="../imgs/right.svg" />
+					<span>过敏包退</span>
+				</li>
+				<li>
+					<embed src="../imgs/right.svg" width="300" height="100" 
+				type="image/svg+xml"
+				pluginspage="../imgs/right.svg" />
+					<span>破损包退</span>
+				</li>
+				<li>
+					<embed src="../imgs/rightno.svg" width="300" height="100" 
+				type="image/svg+xml"
+				pluginspage="../imgs/right.svg" />
+					<span>急速包退</span>
+				</li>
+				<li>
+					<embed src="../imgs/rightno.svg" width="300" height="100" 
+				type="image/svg+xml"
+				pluginspage="../imgs/right.svg" />
+					<span>正品保证</span>
+				</li>
+				<li>
+					<embed src="../imgs/rightno.svg" width="300" height="100" 
+				type="image/svg+xml"
+				pluginspage="../imgs/right.svg" />
+					<span>急速退款</span>
+				</li>
+			</ul>
+			
+			<div class="goodsprice">
+				<span>￥</span><span>55.6</span>
+			</div>
+			
+			<ul class="mui-table-view">
+			    <li class="mui-table-view-cell mui-media">
+		            <img class="mui-media-object mui-pull-left" src="../imgs/3.jpg">
+		            <div class="mui-media-body">
+		            	<div class="btn">
+		            		<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">全部宝贝</button>
+		            		<button type="button" class="mui-btn mui-btn-danger">进店逛逛</button>
+		            	</div>
+		                <p class="mui-ellipsis">京东店铺</p>
+		            </div>
+			    </li>
+			</ul>
+			
+			<ul class="comment">
+				<li>宝贝描述  <span>4.9 高</span></li>
+				<li>卖家服务  <span>4.8 高</span></li>
+				<li>物流服务  <span>4.8 高</span></li>
+			</ul>
+			
+			<div class="evaluate">
+				<div class="top">
+					<p>宝贝评价（6382）</p>
+					<a href="#">查看全部   <span class="mui-icon mui-icon-arrowright"></span></a>
+				</div>
+				<ul class="label">
+					<li>质量不错(7)</li>
+					<li>快递不错(3)</li>
+				</ul>
+				
+				<div class="mui-card">
+					<!--页眉，放置标题-->
+					<div class="mui-card-header mui-card-media">
+						<img src="../imgs/4.jpg" />
+						<div class="mui-media-body">
+							小明
+							<p>发表于 2016-06-30 15:30</p>
+						</div>
+					</div>
+					<!--内容区-->
+					<div class="mui-card-content">
+						东西不错，已经是第三次购买了，老板服务好，速度快，质量是好的没的说，已经推荐了好几个朋友来这家店买了...
+					</div>
+					<!--页脚，放置补充信息或支持的操作-->
+					<!--<div class="mui-card-footer">页脚</div>-->
+				</div>
+				
+				<div class="mui-slider detail">
+				    <div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				        <a class="mui-control-item mui-active" href="#item1">图文详情</a>
+				        <a class="mui-control-item" href="#item2">产品规格</a>
+				    </div>
+				    <!--<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>-->
+				    <div class="mui-slider-group">
+				        <div id="item1" class="mui-slider-item mui-control-content mui-active">
+				            <img src="../imgs/1.jpg" alt="" />
+		                	<img src="../imgs/2.jpg" alt="" />
+		                	<img src="../imgs/3.jpg" alt="" />
+		                	<img src="../imgs/4.jpg" alt="" />
+				        </div>
+				        <div id="item2" class="mui-slider-item mui-control-content">
+				            <ul class="mui-table-view">
+				                <li class="mui-table-view-cell">保修：全国联保</li>
+				                <li class="mui-table-view-cell">成色：全新</li>
+				                <li class="mui-table-view-cell">手表镜面材质：矿物强化玻璃镜面</li>
+				                <li class="mui-table-view-cell">机芯产地：日本</li>
+				                <li class="mui-table-view-cell">生产厂家名称：广州市创世钟表有限公司</li>
+				            </ul>
+				        </div>
+				    </div>
+				</div>
+				
+			</div>
+			
+			<div class="like">
+				<div class="top">
+					<svg class="icon" aria-hidden="true">
+					  <use xlink:href="#icon-heart"></use>
+					</svg>
+					<p>猜你喜欢</p>
+				</div>
+				
+				<ul>
+					<li>
+						<a href="detail.html">
+							<div class="like-left">
+								<img src="../imgs/1.jpg" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">爱奇艺VIP黄金会员月卡 爱奇艺会员1个月</div>
+								<div class="commission">预估佣金:￥6.32</div>
+								<div class="price">
+									<p><span>￥</span>19.9</p>
+									<p>月销49118</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥69.9</p>
+									<div class="ticket">
+										<img src="../imgs/ticket.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="detail.html">
+							<div class="like-left">
+								<img src="../imgs/2.jpg" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">爱奇艺VIP黄金会员月卡 爱奇艺会员1个月</div>
+								<div class="commission">预估佣金:￥6.32</div>
+								<div class="price">
+									<p><span>￥</span>19.9</p>
+									<p>月销49118</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥69.9</p>
+									<div class="ticket">
+										<img src="../imgs/ticket.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="detai3.html">
+							<div class="like-left">
+								<img src="../imgs/3.jpg" alt="" />
+							</div>
+							<div class="like-right">
+								<div class="name">爱奇艺VIP黄金会员月卡 爱奇艺会员1个月</div>
+								<div class="commission">预估佣金:￥6.32</div>
+								<div class="price">
+									<p><span>￥</span>19.9</p>
+									<p>月销49118</p>
+								</div>
+								<div class="price1">
+									<p>天猫价  ￥69.9</p>
+									<div class="ticket">
+										<img src="../imgs/ticket.png" alt="" />
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		  </div>
+		</div>
+		
+		<script src="../js/mui.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/app/detail.js"></script>
+	</body>
+
+</html>
