@@ -54,19 +54,16 @@
 							<input type="text" value="" v-model="form.mobile" placeholder="请输入手机号码" />
 						</li>
 						<li class="code">
-							<input type="text" value="" v-model="form.code" placeholder="请输入验证码" />
+							<input type="text" value="" v-model="form.vcode" placeholder="请输入验证码" />
 							<p @click="getCode">{{codeTip}}</p>
 						</li>
 					</ul>
 				</div>
 			</div>
 			
-			
-			
 			<div class="loginBtn" @click="login" v-if="isLogin">登录</div>
-			<div class="loginBtn isLogin" v-else>登录</div>
+			<div class="loginBtn isLogin" v-else>登录</div> 
 			
-
 		</div>
 		
 		<script src="../js/mui.js"></script>

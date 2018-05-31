@@ -424,38 +424,7 @@ App.prototype.endLoadMore = function(more){
  */
 
 App.prototype.ajax = function(path,data,successCallback){
-	
-	/*var that = this;
-	if(typeof data === 'function'){
-		options = errorCallback;
-		errorCallback = successCallback;
-		successCallback = data;
-		data = null;
-	}*/
-	/*if(typeof errorCallback === "object"){
-		options = errorCallback;
-	}*/
-	/*var mOptions = mui.extend({
-		close: true,
-		wait: true,
-		login: false,
-	},options);*/
-	
-	//var mData = {};
-	//mui.extend(mData,data);
-	
-	//等待框
-	/*if(mOptions.wait){
-		if(typeof mOptions.wait === 'string'){
-			app.waiting(mOptions.wait);
-		}else{
-			//plus.nativeUI.showWaiting('加载中...');
-		}
-	}*/
-	//登录
-	/*if(mOptions.login){
-		mData.userid = this.getUserId();
-	}*/
+
 	//调用数据
 	mui.ajax(AppConfig.apiPath + path,{ 
 		//data: data, 
@@ -463,20 +432,20 @@ App.prototype.ajax = function(path,data,successCallback){
 		type: 'get',
 		timeout: 10000,
 		success: function(data,textStatus,xhr){  
-			//console.log(JSON.stringify(data));
-			
-			//if(textStatus == 'success'){
-				if(data.code === 10000){
-					successCallback(data);  
-				}else{
-					mui.toast(data.msg);
-				}
-				
-			//}
+			console.log(JSON.stringify(data));
+
+			if(data.code === 10000){
+				successCallback(data);  
+			}else{
+				mui.toast(data.msg);
+			}
+			plus.nativeUI.closeWaiting();
+
 		},
 		error: function(xhr,type,errorThrown){ 
 			//console.log(type);
 			mui.toast('网络异常，请稍后重试');
+			plus.nativeUI.closeWaiting();
 		} 
 	});
 };
@@ -486,13 +455,6 @@ App.prototype.waiting = function(msg){
 	//mui.showWaiting(msg);
 	plus.nativeUI.showWaiting('加载中...'); //显示系统等待对话框
 	return this; 
-};
-
-//关闭等待框
-App.prototype.closeWaiting = function(){
-	//mui.closeWaiting();
-	plus.nativeUI.closeWaiting(); //关闭系统等待对话框
-	return this;
 };
 
 //判断用户是否联网
@@ -507,7 +469,7 @@ App.prototype.closeWaiting = function(){
 
 //解决安卓无法改变状态栏背景颜色
 App.prototype.androidTop = function(){
-	console.log(11);
+	//console.log(11);
 	//设置状态栏样式
 	plus.navigator.setStatusBarStyle( "dark" );  
 	var height = plus.navigator.getStatusbarHeight();
@@ -541,16 +503,40 @@ App.prototype.login = function(callback){
 	});
 };
 
-//公共方法，判断是否登录
+//判断是否登录
 function judge_login_status(){
-	return true;
+	var sign = plus.storage.getItem('sign');
+	if(sign){
+		mui.toast('已登录');
+		return true;
+	}
+	return false;
+}
+
+//退出
+function logout(){
+	plus.storage.remove('uid');
+	plus.storage.remove('token');
+	plus.storage.remove('sign');
+	plus.storage.remove('timestamp');
 }
 
 //创建app实例
 var app = new App();
 mui.plusReady(function(){
 	
-	judge_login_status(); //公共方法，判断是否登录
+	//判断是否登录，没有登录就跳转到登录页面
+	if(!judge_login_status()){
+		mui.openWindow({
+			url: '../login.html',
+			id: 'login',
+			waiting: {
+				autoShow: false,
+			}  
+		});
+	}
+	
+	
 	
 });
 

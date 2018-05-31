@@ -4,12 +4,14 @@ var vm = new Vue({
 	data: {
 		form: {
 			mobile: '13360502844',
-			code: ''
+			vcode: ''
 		},
 		codeTip: '获取验证码',
 		isCode: false //是否发送验证码，发送了就等待60秒
 	},
 	mounted: function(){
+
+		
 		mui.plusReady(function(){
 			
 			plus.navigator.setStatusBarStyle( "light" );  
@@ -19,7 +21,7 @@ var vm = new Vue({
 	computed: {
 		isLogin: function(){
 			var phoneReg = /^1[34578]\d{9}$/;
-			var valid = phoneReg.test(this.form.mobile) && this.form.code !== '';
+			var valid = phoneReg.test(this.form.mobile) && this.form.vcode !== '';
 			return valid;
 		}
 	},
@@ -27,15 +29,16 @@ var vm = new Vue({
 		//获取验证码
 		getCode: function(){
 			var self = this;
+			console.log(this.form.mobile);
 			
 			if(!self.isCode){
-				app.ajax('/plugin.php?mod=wechat&act=app&do=sms_code&mobile='+self.form.mobile,{},function(data){
+				app.ajax('/plugin.php?mod=wechat&act=app&do=sms_code&mobile='+this.form.mobile,{},function(data){
 					console.log(JSON.stringify(data));
 
 					mui.toast(data.msg);
 					
 					//60秒后可重发
-					var time = 60;
+					var time = 120;
 					var timeInter = setInterval(function(){
 						self.codeTip = time+'秒后重发';
 						if(time > 0){
@@ -55,6 +58,10 @@ var vm = new Vue({
 		login: function(){
 			var self = this;
 			
+			plus.nativeUI.showWaiting('登陆中...');
+			//console.log(this.form.mobile);
+			//console.log(this.form.vcode);
+			
 			app.ajax('/plugin.php?mod=wechat&act=app&do=register&mobile='+ this.form.mobile + '&vcode='+ this.form.vcode,{},function(data){
 				var uid = data.uid;
 				var token = data.token;
@@ -68,7 +75,7 @@ var vm = new Vue({
 				plus.storage.setItem('timestamp',timestamp);
 				
 				mui.toast('登录成功');
-				
+				plus.webview.show('pages/index/home.html',"fade-in",200);
 				
 				
 			});

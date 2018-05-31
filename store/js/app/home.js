@@ -9,26 +9,6 @@ var vm = new Vue({
 	mounted: function(){
 		var self = this;
 		mui.plusReady(function(){
-
-			//设置状态栏样式
-			plus.navigator.setStatusBarStyle( "dark" );  
-			var height = plus.navigator.getStatusbarHeight();
-			if(mui.os.android){
-				document.querySelector('.topStatus').style.height = height+'px';
-				/*document.querySelector('.topStatus').style.background = 'rgba(188,188,188,1)';*/
-				document.querySelector('.search').style.marginTop = height+'px';
-			}else{
-				document.querySelector('.topStatus_search').style.background = '-webkit-linear-gradient(top,rgba(0,0,0,0.4),rgba(0,0,0,0.05))';
-				document.querySelector('.topStatus').style.height = height+'px';
-				document.querySelector('.search').style.marginTop = height+'px';
-			}
-			
-			//判断用户是否联网
-			//app.CheckNetwork();
-			if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE){ //正常：3 1，断网：1 1
-				mui.alert('网络异常，请检查网络设置！');  
-			}
-			
 			
 			mui.init({
 				//statusBarBackground:"#FF0000",
@@ -47,7 +27,25 @@ var vm = new Vue({
 					},
 				}
 			});
+
+			//设置状态栏样式
+			plus.navigator.setStatusBarStyle( "dark" );  
+			var height = plus.navigator.getStatusbarHeight();
+			if(mui.os.android){
+				document.querySelector('.topStatus').style.height = height+'px';
+				/*document.querySelector('.topStatus').style.background = 'rgba(188,188,188,1)';*/
+				document.querySelector('.search').style.marginTop = height+'px';
+			}else{
+				document.querySelector('.topStatus_search').style.background = '-webkit-linear-gradient(top,rgba(0,0,0,0.4),rgba(0,0,0,0.05))';
+				document.querySelector('.topStatus').style.height = height+'px';
+				document.querySelector('.search').style.marginTop = height+'px';
+			}
 			
+			//判断用户是否联网
+			//app.CheckNetwork();
+			if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE){ //正常：3 1，断网：1 1
+				mui.alert('网络异常，请检查网络设置！');  
+			}	
 			
 			
 		});
@@ -66,7 +64,7 @@ var vm = new Vue({
 				self.$nextTick(function(){ //dom现在更新了
 					//必须在这里，不然轮播图无效
 					var gallery = mui('.mui-slider'); 
-					gallery.slider({ 
+					gallery.slider({  
 						interval: 2000 //自动轮播周期
 					});	
 				});

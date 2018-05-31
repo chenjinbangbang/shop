@@ -59,7 +59,7 @@
 </head>
 <body>
 	
-	<div class="mui-content">
+	<div class="mui-content" id="personal">
 		
 		<div class="setting">
 			<ul>
@@ -84,8 +84,8 @@
 						<span class="userinfo-btn">超级会员</span>
 					</li>
 					<li>
-						<span>邀请码：<span id="inviteCode">123456799</span></span>
-						<span class="copy">复制</span>
+						<span>邀请码：<span id="inviteCode">{{inviteCode}}</span></span>
+						<span class="copy" @click="copyFn">复制</span>
 					</li>
 				</ul>
 			</div>
@@ -235,6 +235,7 @@
 	</div>
 	
 	<script src="../../js/mui.js"></script>
+	<script src="../../js/vue.min.js"></script>
 	<script src="../../js/app.js"></script>
 	<script src="../../js/app/personal.js"></script>
 	
