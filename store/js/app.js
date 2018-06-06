@@ -432,13 +432,13 @@ App.prototype.ajax = function(path,data,successCallback){
 		type: 'get',
 		timeout: 10000,
 		success: function(data,textStatus,xhr){  
-			console.log(JSON.stringify(data));
+			//console.log(JSON.stringify(data));
 
-			if(data.code === 10000){
+			//if(data.code === 10000){
 				successCallback(data);  
-			}else{
+			//}else{ 
 				mui.toast(data.msg);
-			}
+			//}
 			plus.nativeUI.closeWaiting();
 
 		},
@@ -487,57 +487,67 @@ App.prototype.androidTop = function(){
 };
 
 //登录函数
-App.prototype.login = function(callback){
+/*App.prototype.login = function(callback){
 	var username = '123123';
 	var password = '123123';
 	app.ajax('/plugin.php?mod=wechat&act=app&do=login&username='+ username +'&password='+password,{},function(data){
 		//console.log(JSON.stringify(data));
-		plus.storage.setItem('uid',data.uid);
-		plus.storage.setItem('token',data.token);
+		localStorage.setItem('uid',data.uid);
+		localStorage.setItem('token',data.token);
 		
 		var timestamp = Math.floor(new Date().getTime()/1000);
 		var sign = hex_md5(data.token + timestamp + '123');
-		plus.storage.setItem('sign',sign);
-		plus.storage.setItem('timestamp',timestamp);
+		localStorage.setItem('sign',sign);
+		localStorage.setItem('timestamp',timestamp);
 		callback();
 	});
-};
+};*/
 
 //判断是否登录
-function judge_login_status(){
-	var sign = plus.storage.getItem('sign');
+App.prototype.judge_login_status = function(){
+	var sign = localStorage.getItem('sign');
 	if(sign){
-		mui.toast('已登录');
+		//mui.toast('已登录');
 		return true;
 	}
 	return false;
-}
+};
 
-//退出
-function logout(){
-	plus.storage.remove('uid');
-	plus.storage.remove('token');
-	plus.storage.remove('sign');
-	plus.storage.remove('timestamp');
-}
+/*============================ 调试需要 =============================*/
+//获取屏幕所有可视的Webview窗口
+App.prototype.getDisplayWebview = function(){
+	var self = plus.webview.getDisplayWebview();
+	mui.each(self,function(index,item){
+		console.log(index + '：' + item.getURL());
+	});
+};
+//获取蓑鲉webview窗口
+App.prototype.getAll = function(){
+	var self = plus.webview.all();
+	mui.each(self,function(index,item){
+		console.log(index + '：' + item.getURL());
+	});
+};
+//转化为json字符串，用于调试
+App.prototype.jsonstr = function(json){
+	if(Array.isArray(json)){ //判断是否为数组
+		mui.each(json,function(index,item){
+			console.log(index + '：' + JSON.stringify(item));
+		});
+	}else{
+		console.log(JSON.stringify(json));
+	}
+};
 
 //创建app实例
 var app = new App();
-mui.plusReady(function(){
+mui.plusReady(function(){ 
 	
-	//判断是否登录，没有登录就跳转到登录页面
-	if(!judge_login_status()){
-		mui.openWindow({
-			url: '../login.html',
-			id: 'login',
-			waiting: {
-				autoShow: false,
-			}  
-		});
+	//判断用户是否联网
+	if(plus.networkinfo.getCurrentType() == plus.networkinfo.CONNECTION_NONE){ //正常：3 1，断网：1 1
+		mui.alert('网络异常，请检查网络设置！');  
 	}
-	
-	
-	
+
 });
 
 

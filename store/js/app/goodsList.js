@@ -2,8 +2,11 @@
 var vm = new Vue({
 	el: '#refreshContainer',
 	data: {
+		mescroll: null, //下拉刷新上拉加载的对象
+		
+		getVal: '', //全局get请求需要
 		types: [], //类别
-		typeIndex: null, //类别索引
+		typeIndex: 0, //类别索引
 		lists: [], //数据列表
 		page: 1, //加载的页数，用于下拉加载更多数据
 		type: 1, //1代表下拉加载,2代表下拉加载
@@ -12,9 +15,15 @@ var vm = new Vue({
 		var self = this;
 		
 		mui.plusReady(function(){
+			app.androidTop();
+			
 			//状态栏初始化
 			plus.navigator.setStatusBarStyle( "dark" );
 			plus.navigator.setStatusBarBackground('#ffffff');
+			
+			//console.log(plus.webview.currentWebview().type);
+			self.getVal = plus.webview.currentWebview().type;
+			//self.getVal = 'ppq';
 			
 			mui.init({
 				//swipeBack: true, //启动右滑关闭功能
@@ -23,6 +32,7 @@ var vm = new Vue({
 					//下拉刷新
 					down: {
 						auto: true,
+						style: 'circle',
 						callback: function pulldownRefresh(){
 							self.page = 1; //刷新并显示第一页
 							self.type = 1; //代表下拉加载
@@ -41,6 +51,7 @@ var vm = new Vue({
 					}  
 				}
 			});
+			
 
 		});
 	},
@@ -48,28 +59,43 @@ var vm = new Vue({
 		//获取数据
 		initData: function(){
 			var self = this;
+			
 			var sign = localStorage.getItem('sign');
 			var uid = localStorage.getItem('uid');
 			var timestamp = localStorage.getItem('timestamp');
 			
-			app.ajax('/plugin.php?mod=wechat&act=app&do=tb&sign='+ sign +'&timestamp='+ timestamp +'&uid='+ uid +'&get=ppq&page='+self.page,{},function(data){
-				console.log(JSON.stringify(data));
+			var cid = '';
+			if(self.types.length > 0){
+				cid = self.types[self.typeIndex].id; 
+			}
+			
+			
+			app.ajax('/plugin.php?mod=wechat&act=app&do=tb&sign='+ sign +'&timestamp='+ timestamp +'&uid='+ uid +'&get='+ self.getVal +'&page='+self.page +'&cid='+cid,{},function(data){
+				//console.log('获取数据'); 
+				//console.log(JSON.stringify(data));
+				
+				//标题
+				document.querySelector('.mui-title').innerHTML = self.getVal;
 				
 				//类别
-				self.types = data.type;
+				if(self.types.length === 0){ 
+					self.types = data.type;
+				}
 				//self.typeIndex = self.types.
 				
 				//数据
 				var list = data.list; 
+				//console.log(JSON.stringify(list));
 				if(self.type === 1){
 					//下拉刷新
 					self.lists = list;
 					
-					 //有重新触发上拉加载的需求（比如当前类别已无更多数据，但切换到另外一个类别后，应支持继续上拉加载）
+					//有重新触发上拉加载的需求（比如当前类别已无更多数据，但切换到另外一个类别后，应支持继续上拉加载）
 					//mui('#refreshContainer').pullRefresh().refresh(true);
 					
 					//结束下拉刷新
 					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+					//self.mescroll.endSuccess(); //隐藏下拉刷新和上拉加载的状态
 				}else if(self.type === 2){
 					//下拉加载
 					if(list.length > 0){
@@ -79,16 +105,35 @@ var vm = new Vue({
 						mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);	
 					}
 				}
+				//self.mescroll.endSuccess();
 
 			},function(){
-				 mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+				mui('#refreshContainer').pullRefresh().endPullupToRefresh(true);
+				//联网失败的回调,隐藏下拉刷新和上拉加载的状态
+				//self.mescroll.endErr();
 			});
 		},
 		//点击切换类别
 		typeFn: function(index){
 			this.typeIndex = index;
 			
+			//获取数据
 			this.initData();
+		},
+		//跳转到商品详情
+		toDetail: function(goods_id){
+			var page = 'detail.html';
+			mui.openWindow({ 
+				url: page,
+				id: page,
+				extras: {
+					goods_id: goods_id
+				},
+				waiting: {
+					autoShow: true,
+					title: '正在加载...'
+				}
+			});
 		}
 	}
 });
@@ -159,10 +204,9 @@ function initData(){
 
 
 
-var likeLi = document.querySelectorAll('.like ul li');
+/*var likeLi = document.querySelectorAll('.like ul li');
 var likeLeft = document.querySelectorAll('.like .like-left');
-
-/*document.querySelector('.menuIcon').addEventListener('tap',function(){
+document.querySelector('.menuIcon').addEventListener('tap',function(){
 	
 	if(this.classList.contains('mui-icon-list')){
 		this.classList.remove('mui-icon-list');

@@ -5,27 +5,29 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title></title>
     <link rel="stylesheet" href="../../css/mui.min.css"/>
+    <link rel="stylesheet" href="../../css/mescroll.min.css"/>
     <link rel="stylesheet" href="../../css/app.css"/>
     <link rel="stylesheet" href="../../fonts/iconfont.css"/>
     <style>
     	.mui-content{ background-color:#f5f5f5;}
     	
-    	.setting{ position:absolute; color:#fff; right:0; margin:32px 12px;}
+    	.setting{ position:absolute; color:#fff; right:0; margin:-20px 12px;}
     	.setting ul{ display:flex;}
     	.setting ul li{ margin-left:12px;}
     	.setting ul li a{ color:#fff;}
     	
-    	.userinfo{ background: -webkit-linear-gradient(top, #E80056 , #8F1A96); height:200px; padding:50px 0; margin-bottom:100px; color:#eee; /*background-color:#F45118;*/ display:flex;}
+    	.userinfo{ background: -webkit-linear-gradient(top, #E80056 , #8F1A96); position:relative; height:200px; padding:50px 0; margin-bottom:100px; color:#eee; /*background-color:#F45118;*/ display:flex;}
     	.userinfo .userinfo-img{ flex:1; text-align:center;}
     	.userinfo .userinfo-img img{ width:70px; height:70px; border-radius:50%;}
     	.userinfo .userinfo-info{ flex:3; margin-top:20px;}
     	.userinfo .userinfo-info ul{}
-    	.userinfo .userinfo-info ul li{ margin-bottom:8px;}
-    	.userinfo .userinfo-info ul li span{}
+    	.userinfo .userinfo-info ul li{ height:20px; margin-bottom:8px; display:flex;}
+    	.userinfo .userinfo-info ul li span{}  
     	.userinfo .userinfo-info ul li .userinfo-btn{ background-color:#fff; color:#F45118; margin-left:5px; padding:1px 12px; border-radius:20px;}
-    	.userinfo .userinfo-info ul li .copy{ border:1px solid #fff; border-radius:20px; margin-left:5px; padding:1px 5px;}
-    
-    	.earnings{ width:94%; /*margin:15px auto;*/ left:3%; margin-top:-150px; position:absolute; background-color:#fff; border-radius:8px;}
+    	.userinfo .userinfo-info ul li .copy{ border:1px solid #fff; border-radius:20px; font-size:12px; margin-left:10px; padding:0 7px;}
+     	.userinfo .userinfo-info ul li img{ width:70px; margin-left:5px;}
+     
+    	.earnings{ width:94%; /*margin:15px auto;*/ left:3%; margin-top:100px; position:absolute; background-color:#fff; border-radius:8px;}
     	.earnings .earnings-top{ height:50px; align-items:center; display:flex;}
     	.earnings .earnings-top p{} 
     	.earnings .earnings-top p:nth-child(1){ margin-left:10px;}
@@ -53,188 +55,166 @@
     	.tools ul{ display:flex; flex-wrap:wrap; text-align:center;}
     	.tools ul li{ width:25%; margin-top:10px;}
     	.tools ul li a{ color:#333;}
-    	.tools ul li a img{ width:40px;}
+    	.tools ul li a img{ width:28px;}
     	.tools ul li a p{}   
     </style>
 </head>
 <body>
 	
-	<div class="mui-content" id="personal">
-		
-		<div class="setting">
-			<ul>
-				<li>
-					<a class="mui-icon mui-icon-chatbubble"></a>
-				</li>
-				<li>
-					<a class="mui-icon mui-icon-gear" href="../personal/settings.html"></a>
-				</li>
-			</ul>
-		</div>
-		
-		<header class="userinfo">
+	
+	<div id="mescroll" class="mescroll">
+   		<div class="mui-content" id="personal">
 
-			<div class="userinfo-img">
-				<img src="../../imgs/4.jpg/" alt="" />
-			</div>
-			<div class="userinfo-info">
+			<header class="userinfo">
+				
+				<div class="setting">
+					<ul>
+						<li>
+							<a class="mui-icon mui-icon-chatbubble"></a>
+						</li>
+						<li>
+							<span class="mui-icon mui-icon-gear" @tap="toSettings"></span>
+						</li>
+					</ul>
+				</div>
+	
+				<div class="userinfo-img">
+					<img :src="datas.avatar" alt="" v-if="datas.avatar" />
+					<img src="../../imgs/4.jpg" alt="" v-else />
+				</div>
+				<div class="userinfo-info">
+					<ul>
+						<li>
+							<span>{{datas.ddusername}}</span>
+							<img :src="datas.level_img" alt="" /> 
+						</li>
+						<li>
+							<span>邀请码：<span id="inviteCode">{{inviteCode}}</span></span>
+							<span class="copy" @click="copyFn">复制</span>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="earnings">
+					<div class="earnings-top">
+						<p>可提现金额 <span>￥{{datas.live_money}}</span></p>
+						<p class="deposit">提现</p>
+					</div>
+					<div class="earnings-foot">
+						<ul>
+							<li>
+								<p>￥{{datas.month_money}}</p>
+								<p>本月预估</p>
+							</li>
+							<li>
+								<p>￥{{datas.today_money}}</p>
+								<p>今天收益</p>
+							</li>
+							<li>
+								<p>{{datas.fans}}</p>
+								<p>我的粉丝</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</header>
+			
+			
+			
+			<div class="tools">
+				<div class="title">
+					<h4>我的订单</h4>
+					<a href="../personal/orders.html">查看更多订单  <span class="mui-icon mui-icon-arrowright"></span> </a>
+				</div>
 				<ul>
 					<li>
-						<span>kudzu</span>
-						<span class="userinfo-btn">超级会员</span>
+						<a href="../personal/orders.html">
+							<img src="../../imgs/user_icon5.png"/>
+							<p>全部订单</p>
+						</a>
 					</li>
 					<li>
-						<span>邀请码：<span id="inviteCode">{{inviteCode}}</span></span>
-						<span class="copy" @click="copyFn">复制</span>
+						<a href="../personal/orders.html">
+							<img src="../../imgs/tb.png"/>
+							<p>淘宝订单</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/orders.html">
+							<img src="../../imgs/jd.png"/>
+							<p>京东订单</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/orders.html">
+							<img src="../../imgs/pdd.png"/>
+							<p>拼多多订单</p>
+						</a>
 					</li>
 				</ul>
 			</div>
-		</header>
-		
-		<div class="earnings">
-			<div class="earnings-top">
-				<p>可提现金额 <span>￥2000</span></p>
-				<p class="deposit">提现</p>
-			</div>
-			<div class="earnings-foot">
+			
+			<div class="tools">
+				<div class="title">
+					<h4>必备工具</h4>
+				</div>
 				<ul>
 					<li>
-						<p>￥200</p>
-						<p>本月预估</p>
+						<a href="../personal/earnings.html">
+							<img src="../../imgs/user_icon6.png"/>
+							<p>收益报表</p>
+						</a>
 					</li>
 					<li>
-						<p>￥100</p>
-						<p>今天收益</p>
+						<a href="../personal/fans.html">
+							<img src="../../imgs/user_icon7.png"/>
+							<p>我的粉丝</p>
+						</a>
 					</li>
 					<li>
-						<p>50</p>
-						<p>我的粉丝</p>
+						<a href="../personal/invite.html">
+							<img src="../../imgs/user_icon5.png"/>
+							<p>邀请有奖</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/ser.html">
+							<img src="../../imgs/user_icon4.png"/>
+							<p>客服中心</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/list.html" title="官方公告">
+							<img src="../../imgs/user_icon5.png"/>
+							<p>官方公告</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/list.html" title="新手攻略">
+							<img src="../../imgs/user_icon4.png"/>
+							<p>新手攻略</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/list.html" title="常见问题">
+							<img src="../../imgs/user_icon3.png"/>
+							<p>常见问题</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/about.html">
+							<img src="../../imgs/user_icon7.png"/>
+							<p>关于我们</p>
+						</a>
 					</li>
 				</ul>
 			</div>
+			
 		</div>
-		
-		<!--<main class="menu">
-			<ul>
-				<li>
-					<a href="../personal/earnings.html">
-						<img src="../../imgs/user_icon1.png" alt="" />
-						<p>收益</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/orders.html">
-						<img src="../../imgs/user_icon2.png" alt="" />
-						<p>订单</p> 
-					</a>
-				</li>
-				<li>
-					<a href="../personal/fans.html">
-						<img src="../../imgs/user_icon3.png" alt="" />
-						<p>粉丝</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/invite.html">
-						<img src="../../imgs/user_icon4.png" alt="" />
-						<p>邀请<p> 
-					</a>
-				</li>
-			</ul>
-		</main>-->
-		
-		<div class="tools">
-			<div class="title">
-				<h4>我的订单</h4>
-				<a href="../personal/orders.html">查看更多订单  <span class="mui-icon mui-icon-arrowright"></span> </a>
-			</div>
-			<ul>
-				<li>
-					<a href="../personal/orders.html">
-						<img src="../../imgs/user_icon5.png"/>
-						<p>全部订单</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/orders.html">
-						<img src="../../imgs/user_icon7.png"/>
-						<p>淘宝订单</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/orders.html">
-						<img src="../../imgs/user_icon5.png"/>
-						<p>京东订单</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/orders.html">
-						<img src="../../imgs/user_icon6.png"/>
-						<p>拼多多订单</p>
-					</a>
-				</li>
-			</ul>
-		</div>
-		
-		<div class="tools">
-			<div class="title">
-				<h4>必备工具</h4>
-			</div>
-			<ul>
-				<li>
-					<a href="../personal/earnings.html">
-						<img src="../../imgs/user_icon6.png"/>
-						<p>收益报表</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/fans.html">
-						<img src="../../imgs/user_icon7.png"/>
-						<p>我的粉丝</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/invite.html">
-						<img src="../../imgs/user_icon5.png"/>
-						<p>邀请有奖</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/ser.html">
-						<img src="../../imgs/user_icon4.png"/>
-						<p>客服中心</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/list.html" title="官方公告">
-						<img src="../../imgs/user_icon5.png"/>
-						<p>官方公告</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/list.html" title="新手攻略">
-						<img src="../../imgs/user_icon4.png"/>
-						<p>新手攻略</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/list.html" title="常见问题">
-						<img src="../../imgs/user_icon3.png"/>
-						<p>常见问题</p>
-					</a>
-				</li>
-				<li>
-					<a href="../personal/about.html">
-						<img src="../../imgs/user_icon7.png"/>
-						<p>关于我们</p>
-					</a>
-				</li>
-			</ul>
-		</div>
-		
 	</div>
 	
 	<script src="../../js/mui.js"></script>
+	<script src="../../js/mescroll.min.js"></script>
 	<script src="../../js/vue.min.js"></script>
 	<script src="../../js/app.js"></script>
 	<script src="../../js/app/personal.js"></script>

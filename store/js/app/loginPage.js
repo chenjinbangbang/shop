@@ -10,9 +10,15 @@ var vm = new Vue({
 		isCode: false //是否发送验证码，发送了就等待60秒
 	},
 	mounted: function(){
-
-		
-		mui.plusReady(function(){
+		var self = this;
+		mui.plusReady(function(){ 
+			
+			var wvs = plus.webview.getDisplayWebview();
+			for(var i=0;i<wvs.length;i++){
+				console.log(wvs[i].getURL());
+			}
+			//mui.back();
+			plus.webview.show('home');
 			
 			plus.navigator.setStatusBarStyle( "light" );  
 			
@@ -22,7 +28,7 @@ var vm = new Vue({
 		isLogin: function(){
 			var phoneReg = /^1[34578]\d{9}$/;
 			var valid = phoneReg.test(this.form.mobile) && this.form.vcode !== '';
-			return valid;
+			return valid; 
 		}
 	},
 	methods: {
@@ -66,18 +72,33 @@ var vm = new Vue({
 				var uid = data.uid;
 				var token = data.token;
 				
-				plus.storage.setItem('uid',uid); //用户id
-				plus.storage.setItem('token',token); //登录token
+				localStorage.setItem('uid',uid); //用户id
+				localStorage.setItem('token',token); //登录token
 				
 				var timestamp = Math.floor(new Date().getTime()/1000); //时间戳，单位秒
 				var sign = hex_md5(data.token + timestamp + '123'); //签名
-				plus.storage.setItem('sign',sign);
-				plus.storage.setItem('timestamp',timestamp);
+				localStorage.setItem('timestamp',timestamp);
+				localStorage.setItem('sign',sign);
+				
+				
+				//console.log(uid);
+				//console.log(token); 
+				//console.log(sign);
+				//console.log(localStorage.getItem('timestamp'));
 				
 				mui.toast('登录成功');
-				plus.webview.show('pages/index/home.html',"fade-in",200);
 				
+				var loginPage = plus.webview.currentWebview();
+				var login = plus.webview.getWebviewById('login');
+				loginPage.hide();
+				login.hide(); 
 				
+				var personal = plus.webview.getWebviewById('personal');
+				personal.show();
+				mui.fire(personal,'downCallback');
+				
+				var home = plus.webview.getWebviewById('home');
+				mui.fire(home,'initData');	
 			});
 		}
 	}

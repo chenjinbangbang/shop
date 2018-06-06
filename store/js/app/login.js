@@ -4,7 +4,7 @@ var vm = new Vue({
 	data: {},
 	mounted: function(){
 		mui.plusReady(function(){
-			
+
 			plus.navigator.setStatusBarStyle( "light" );  
 			
 		});
@@ -13,7 +13,7 @@ var vm = new Vue({
 		loginBtn: function(){
 			mui.openWindow({
 				url: 'loginPage.html',
-				id: 'loginPage.html',
+				id: 'loginPage',
 				waiting: {
 					autoShow: false,
 				}
@@ -24,8 +24,8 @@ var vm = new Vue({
 
  mui.plusReady(function(){
  	
- 	
- 	
+ 	//锁定屏幕为竖屏模式，不能设备如何旋转，屏幕都不会切换到横屏模式。
+ 	/*plus.screen.lockOrientation("portrait-primary");
  	var settings  = app.getSettings(); //获取应用本地配置
  	var state = app.getState();
  	
@@ -34,7 +34,7 @@ var vm = new Vue({
  	if(!mainPage){
  		mainPage = mui.preload({ //页面预加载
  			url: 'pages/index/home.html',
- 			id: 'pages/index/home.html'
+ 			id: 'home'
  		});
  	}else{
  		main_loaded_flag = true;
@@ -53,7 +53,7 @@ var vm = new Vue({
  				mainPage.show("pop-in");
  			}
  		},20);
- 	};
+ 	};*/
  	
  	//检查登录状态，锁屏状态开始
  	/*if(settings.autoLogin && state.token && settings.gestures){

@@ -18,6 +18,7 @@
 		.mui-action-back{ color:#000;}
 		.mui-icon{ /*border:1px solid #f00;*/}
 		.mui-active .mui-tab-label,.mui-active .mui-icon{ color:#E80056;}
+		.firendsColor{ color:#F45118 !important; }
 		
 		.icon{}
 		.iconfont{ font-size:18px !important; padding-top:4px !important; /*width:22px !important; height:22px !important; font-size:16px !important*/;}
@@ -26,17 +27,15 @@
 <body>
 	
 	<nav class="mui-bar mui-bar-tab" id="index">
-		<a class="mui-tab-item mui-active" id="home">
+		<a class="mui-tab-item" :class="{'mui-active': tabsId === tab.id}" v-for="tab,index in tabs" href="javascript:;" @tap="tabsPages(tab.id)">
+			<span class="mui-icon" :class="[tab.icon,{firendsColor: index === 2}]"></span>
+			<span class="mui-tab-label">{{tab.name}}</span>
+		</a>
+		<!--<a class="mui-tab-item mui-active" id="home">
 			<span class="mui-icon mui-icon-home"></span>
 			<span class="mui-tab-label">首页</span>
 		</a>
 	    <a class="mui-tab-item" id="search">
-			<!--<span class="mui-icon">
-				<svg class="icon" aria-hidden="true">
-				  <use xlink:href="#icon-search"></use>
-				</svg>
-			</span>
-			<span class="mui-tab-label" style="margin-top:-7px;">搜索</span>-->
 			<span class="mui-icon mui-icon-search"></span>
 			<span class="mui-tab-label">搜索</span>
 		</a>
@@ -51,7 +50,7 @@
 	    <a class="mui-tab-item" id="personal">
 			<span class="mui-icon mui-icon-person"></span>
 			<span class="mui-tab-label">个人中心</span>
-		</a>
+		</a>-->
 	</nav> 
 	
 	<script src="js/mui.js"></script>
@@ -60,19 +59,56 @@
 	<script src="fonts/iconfont.js"></script>
 	<script> 
 		
-		/*var vm = new Vue({
+		var vm = new Vue({
 			el: '#index',
-			data: {},
-			mounted: function(){*/
-				//var self = this;
+			data: {
+				//下面tabs导航
+				tabs: [
+					{ name: '首页',icon: 'mui-icon-home',id: 'home',url: 'pages/index/home.html'},
+					{ name: '搜索',icon: 'mui-icon-search',id: 'search',url: 'pages/index/search.html'},
+					{ name: '朋友圈',icon: 'mui-icon-contact',id: 'friends',url: 'pages/index/friends.html'},
+					{ name: '商城',icon: 'iconfont icon-store',id: 'store',url: 'pages/index/store.html'},
+					{ name: '个人中心',icon: 'mui-icon-person',id: 'personal',url: 'pages/index/personal.html'}
+				],
+				tabsId: 'home', //当前tabs导航的id
+			},
+			mounted: function(){
+				var self = this;
+				
+				var styles = {
+		    		top: '0',
+		    		bottom: '60px'
+		    	};
+		    	var preloadPages = []; //预加载其他页面
+		    	mui.each(self.tabs,function(index,item){
+		    		if(index>0){
+		    			preloadPages.push({
+			    			url: self.tabs[index].url,
+			    			id: self.tabs[index].id,
+			    			styles: styles
+			    		});
+		    		} 
+		    	});
+				
+				mui.init({ 
+					//先加载首页
+					subpages: [
+						{
+							url: self.tabs[0].url,
+							id: self.tabs[0].id,
+							styles: styles
+						}
+					],
+					//预加载其他页面
+					preloadPages: preloadPages
+				});
+				
 				mui.plusReady(function(){
 					
-					mui.init();  
-					
-					//关闭页面，1。点击包含.mui-actiion-back类的控件，2.在屏幕内，向右快速滑动，2.Android手机按下back按键
+					//关闭页面，1.点击包含.mui-actiion-back类的控件，2.在屏幕内，向右快速滑动，2.Android手机按下back按键
 					var firstBack; 
 					mui.back = function(){
-						if(firstBack){
+						if(firstBack){ 
 							if(new Date().getTime() - firstBack < 1000){
 								plus.runtime.quit();
 							}
@@ -85,78 +121,77 @@
 						}
 					} 
 					
-					//跳转页面
-					var Index = 0; //默认打开首页显示的子页序号
-			    	var subPages = [
-			    		{id: 'home',url: 'pages/index/home.html'},
-			    		{id: 'search',url: 'pages/index/search.html'},
-			    		{id: 'friends',url: 'pages/index/friends.html'},
-			    		{id: 'store',url: 'pages/index/store.html'},
-			    		{id: 'personal',url: 'pages/index/personal.html'}
-			    	];
-			    	var subPageStyle = {
-			    		top: '0',
-			    		bottom: '50px'
-			    	};
-			    	
-			    	
-			    	
-			    	var cw = plus.webview.currentWebview(); //获取当前的窗体
-    		
-		    		for(var i=0;i<subPages.length;i++){
-		    		
-		    			var sub = plus.webview.create(subPages[i].url,subPages[i].id,subPageStyle); //创建窗体
-		
-		    			sub.hide(); //所有窗体都隐藏 
-		    			//如不是我们设置的默认的子页则隐藏，否则添加到窗口中
-				        /*if (i != Index) {  
-				            sub.hide(); 
-				        }*/
-		    			cw.append(sub); //把窗体追加到self中
-		    		}  
-		
-		    		plus.webview.show(subPages[0].id); //显示subPages[0]的窗体
-		    		  
-		    		//跳转到登录页面
-		    		/*var loginPage = 'pages/login.html';
-		    		mui.openWindow({
-						url: loginPage,
-						id: loginPage,
-						waiting: {
-							autoShow: false,
-						}  
-					});*/
-					
-					//点击底部导航跳转页面   
-			    	var activeTab = subPages[Index].id;
-			    	mui('.mui-bar-tab').on('tap','a',function(){ 
-			    		//var self = plus.webview.currentWebview(); //获取当前的窗体
-			    		var targetTab = this.getAttribute('id');
-			    		if (targetTab == activeTab) {
-					        return;
-					    }
-			
-			    		plus.webview.show(targetTab,"fade-in",200);
-			    		plus.webview.hide(activeTab);
-			    		
-			    		//更改当前活跃的选项卡
-			    		activeTab = targetTab;
-			    		
-			    		//改变状态栏的字体颜色
-			    		if(targetTab == 'search' || targetTab == 'personal'){
-			    			plus.navigator.setStatusBarStyle( "light" );  
-			    		}else{
-			    			plus.navigator.setStatusBarStyle( "dark" );  
-			    		}
-			
-			    	}); 
-
+					//初始化所有webview窗体
+					//self.showWebivew();
 					
 				});
+			},
+			methods: {
+				//初始化所有webview窗体
+				showWebivew: function(){
 
-				
-			//}
-		//});
+			    	var styles = {
+			    		top: '0',
+			    		bottom: '60px'
+			    	};
+			    	var cw = plus.webview.currentWebview(); //获取当前的窗体
+			    	
+			    	//添加5个窗体到cw中
+			    	for(var i=0;i<this.tabs.length;i++){
+		    			var sub = plus.webview.create(this.tabs[i].url,this.tabs[i].id,styles); //创建窗体
+		    			sub.hide(); //所有窗体都隐藏 
+		    			cw.append(sub); //把窗体追加到cw中
+		    		}  
+		    		plus.webview.show(this.tabs[0].id); //显示subPages[0]的窗体
+		    		
+				},
+				//切换tabs导航的webview窗口
+				tabsPages: function(id){
+					var targetTab = plus.webview.getWebviewById(id); //需要切换的窗体
+					var activeTab = plus.webview.getWebviewById(this.tabsId); //当前的窗体
+
+		    		if (targetTab == activeTab) {
+				        return;
+				    }
+		    		
+		    		//plus.webview.show(targetTab,"fade-in"); //需要切换的窗体显示
+			    	//plus.webview.hide(activeTab); //当前的窗体隐藏
+			    	targetTab.show(); 
+		    		activeTab.hide();   
+			    	 
+		    		//更改当前活跃的选项卡
+			    	activeTab = targetTab;
+			    	this.tabsId = id; 
+			    	
+			    	if(id == 'friends' || id == 'personal'){
+		    			//判断是否登录，没有登录就跳转到登录页面
+						if(!app.judge_login_status()){
+							plus.webview.hide('personal');
+							mui.openWindow({
+								url: 'pages/login.html',
+								id: 'login',
+								waiting: {
+									autoShow: false,
+								}  
+							});
+						}
+		    		}
+			    	
+			    	//改变状态栏的字体颜色
+		    		if(id == 'search' || id == 'personal'){ 
+		    			plus.navigator.setStatusBarStyle( "light" );  
+		    		}else{
+		    			plus.navigator.setStatusBarStyle( "dark" );  
+		    		}
+			    	
+				}
+			}
+		});
+		
+		//用于用户退出登录时tabs切换到home页面
+		window.addEventListener('tabsPages',function(){
+			vm.tabsPages('home');
+		});
 
 		
 	</script>
