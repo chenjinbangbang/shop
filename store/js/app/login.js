@@ -6,6 +6,16 @@ var vm = new Vue({
 		mui.plusReady(function(){
 
 			plus.navigator.setStatusBarStyle( "light" );  
+			plus.screen.lockOrientation("portrait-primary"); //锁定屏幕为竖屏模式，不管设置如何旋转，屏幕都不会切换到横屏模式
+			
+			var indexPage = plus.webview.getWebviewById('index');
+			//console.log(index);
+			if(!indexPage){
+				indexPage = mui.preload({
+					url: '../index.html',
+					id: 'index'
+				});
+			}
 			
 		});
 	},
